@@ -25,8 +25,8 @@
 	<br/>
 	
 	<br>
-	<a href="videotexture.html" style="background-color:#008B8B; color: #BA55D3; border: 2px solid #7B68EE; font-family: Monospace;">IOS Version</a>
-	<a href="css3d_youtube.html" style="background-color:#008B8B; color: #BA55D3; border: 2px solid #7B68EE; font-family: Monospace;">IOS Version 2</a>
+	<a href="videotexture.html" style="background-color: black; color: grey; border: 2px solid white; font-family: Monospace;">IOS Version</a>
+	<a href="css3d_youtube.html" style="background-color: black; color: grey; border: 2px solid white; font-family: Monospace;">IOS Version 2</a>
 </div>	
 
 <script>
@@ -130,9 +130,24 @@ function initialize()
 	let material1 = new THREE.MeshBasicMaterial( { map: texture } );
 	
 	mesh1 = new THREE.Mesh( geometry1, material1 );
-	mesh1.rotation.x = -Math.PI/2;
-	
+	//mesh1.rotation.x = -Math.PI/2;
+	mesh1.rotation.x = 149.5;
+	mesh1.rotation.z = -0.05;
+
 	markerRoot1.add( mesh1 );
+
+	var objectLoader = new THREE.ObjectLoader();
+	objectLoader.load( "models/3d-animation-phone.json", function ( obj ) {
+		myObj = obj;
+		obj.scale.set(0.025,0.025,0.025);
+		obj.rotation.z += 110;
+		obj.rotation.x += 90;
+		obj.position.z += 2;
+		obj.position.y += -2;
+		
+
+		markerRoot1.add( obj );
+	} ); 
 }
 
 
