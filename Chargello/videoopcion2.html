@@ -120,6 +120,8 @@ function initialize()
 		type: 'pattern', patternUrl: "data/hiro.patt",
 	})
 
+	
+
 	let geometry1 = new THREE.PlaneBufferGeometry(2,2, 4,4);
 
 	let video = document.getElementById( 'video' );
@@ -135,7 +137,56 @@ function initialize()
 	mesh1.rotation.z = -0.05;
 
 	markerRoot1.add( mesh1 );
+	
+	var geometry	= new THREE.CubeGeometry(0.5,0.5,0.5);
+	var material	= new THREE.MeshNormalMaterial({
+		transparent : true,
+		opacity: 0.15,
+		side: THREE.DoubleSide
+	});
+	
+	var geometry4 = new THREE.BoxGeometry(1,1,1);
+	
+	let loader = new THREE.TextureLoader();
+	let facebooktexture = loader.load( 'models/spr_target_oatly_bnt_facebook.png', render );
 
+	let materialfacebook = new THREE.MeshLambertMaterial({ 
+		map: facebooktexture
+	});
+
+	let loader2 = new THREE.TextureLoader();
+	let instagramtexture = loader2.load( 'models/spr_target_oatly_btn_instagram.png', render );
+
+	let materialinstagram = new THREE.MeshLambertMaterial({ 
+		map: instagramtexture
+	});
+
+	var mesh7 = new THREE.Mesh( geometry, material  );
+	mesh7.position.z	= 1.6;
+	mesh7.position.x = 1;
+	markerRoot1.add( mesh7 );
+
+	var mesh8 = new THREE.Mesh( geometry, material  );
+	mesh8.position.z	= 1.6;
+	mesh8.position.x = -1;
+	markerRoot1.add( mesh8 );
+
+	var mesh = new THREE.Mesh( geometry, materialinstagram  );
+	mesh.position.z	= 1.6;
+	mesh.position.x = 1;
+	markerRoot1.add( mesh );
+
+	var geometry2	= new THREE.CubeGeometry(0.5,0.5,0.5);
+	var material2	= new THREE.MeshNormalMaterial({
+		transparent : true,
+		opacity: 0.5,
+		side: THREE.DoubleSide
+	});
+	var mesh3	= new THREE.Mesh( geometry2, materialfacebook );
+	mesh3.position.z	= 1.6;
+	mesh3.position.x = -1;
+	markerRoot1.add( mesh3 );
+	
 	var objectLoader = new THREE.ObjectLoader();
 	objectLoader.load( "models/3d-animation-phone.json", function ( obj ) {
 		myObj = obj;
@@ -143,12 +194,11 @@ function initialize()
 		obj.rotation.z += 110;
 		obj.rotation.x += 90;
 		obj.position.z += 2;
-		
-		
-		
-
 		markerRoot1.add( obj );
 	} ); 
+
+	
+	
 }
 
 
