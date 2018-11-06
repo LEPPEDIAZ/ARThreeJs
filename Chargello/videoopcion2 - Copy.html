@@ -12,6 +12,8 @@
 	<script src="threex/threex-artoolkitcontext.js"></script>
 	<script src="threex/threex-arbasecontrols.js"></script>
 	<script src="threex/threex-armarkercontrols.js"></script>
+	<script src="js/renderers/CSS3DRenderer.js"></script>
+	<script src="js/controls/TrackballControls.js"></script>
 </head>
 
 <body style='margin : 0px; overflow: hidden; font-family: Monospace;'>
@@ -20,18 +22,18 @@
 	
 	<source src="video/chargello_02.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
 </video>
-<div style='position: absolute; top: 10px; width:100%; text-align: center; z-index: 1; background-color: black; color: white;'>
+<div style='position: absolute; top: 10px; width:100%; text-align: center; z-index: 1; background-color: black; color:aliceblue;'>
 	<a>Chargello</a> 
 	<br/>
-	<br>
-	<a href="https://www.facebook.com/Chargello/" style="background-color: #00008B; color: white; border: 2px solid #00008B; font-family: Monospace; border-radius: 25px; text-decoration: none;">Facebook</a>
-	<a href="https://www.instagram.com/chargello/?hl=es-la" style="background-color: #C71585; color: white; border: 2px solid #C71585; font-family: Monospace; border-radius: 25px; text-decoration: none;">Instagram</a>
-	<br>
-	<br>
-	<a href="YoutubeIOS.html" style="background-color: black; color: grey; border: 2px solid white; font-family: Monospace; border-radius: 25px; text-decoration: none;">_Not Running? Try: IOS Version_</a>
 	
+	<br>
+	<a href="css3d_youtube.html" style="background-color: black; color: grey; border: 2px solid white; font-family: Monospace;">Not Running? Try: IOS Version</a>
+	<a href="https://www.facebook.com/Chargello/" style="background: url('models/spr_target_oatly_bnt_facebook.png') no-repeat; color: grey; border: 2px solid white; font-family: Monospace;">Facebook</a>
+	<a href="https://www.instagram.com/chargello/?hl=es-la" style="background-color: black; color: grey; border: 2px solid white; font-family: Monospace;">instagram</a>
 	
-</div>	
+</div>
+<div id="container"></div>
+<div id="blocker"></div>	
 
 <script>
 
@@ -42,6 +44,30 @@ var arToolkitSource, arToolkitContext;
 var markerRoot1;
 
 var mesh1;
+
+var controls;
+
+var Element = function ( id, x, y, z, ry ) {
+
+var div = document.createElement( 'div' );
+div.style.width = '480px';
+div.style.height = '360px';
+div.style.backgroundColor = '#000';
+
+var iframe = document.createElement( 'iframe' );
+iframe.style.width = '480px';
+iframe.style.height = '360px';
+iframe.style.border = '0px';
+iframe.src = [ 'https://www.youtube.com/embed/', id, '?rel=0' ].join( '' );
+div.appendChild( iframe );
+
+var object = new THREE.CSS3DObject( div );
+object.position.set( x, y, z );
+object.rotation.y = ry;
+
+return object;
+
+};
 
 initialize();
 animate();
@@ -124,7 +150,12 @@ function initialize()
 		type: 'pattern', patternUrl: "data/pattern-marker.patt",
 	})
 
-	
+	var group = new THREE.Group();
+	group.add( new Element( 'yt5vbb5RAv4', 0, 0, 240, 0 ) );
+	group.add( new Element( 'yt5vbb5RAv4', 240, 0, 0, Math.PI / 2 ) );
+	group.add( new Element( 'yt5vbb5RAv4', 0, 0, - 240, Math.PI ) );
+	group.add( new Element( 'yt5vbb5RAv4', - 240, 0, 0, - Math.PI / 2 ) );
+	markerRoot1.add( group );
 
 	let geometry1 = new THREE.PlaneBufferGeometry(2,2, 4,4);
 
