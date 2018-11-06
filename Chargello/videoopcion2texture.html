@@ -12,6 +12,8 @@
 	<script src="threex/threex-artoolkitcontext.js"></script>
 	<script src="threex/threex-arbasecontrols.js"></script>
 	<script src="threex/threex-armarkercontrols.js"></script>
+	<script src='videotexture/vendor/three.js/examples/js/libs/stats.min.js'></script>
+	<script src='videotexture/threex.videotexture.js'></script>
 </head>
 
 <body style='margin : 0px; overflow: hidden; font-family: Monospace;'>
@@ -28,8 +30,10 @@
 	<a href="https://www.instagram.com/chargello/?hl=es-la" style="background-color: #C71585; color: white; border: 2px solid #C71585; font-family: Monospace; border-radius: 25px; text-decoration: none;">Instagram</a>
 	<br>
 	<br>
-	<a href="videoopcion2texture.html" style="background-color: black; color: grey; border: 2px solid white; font-family: Monospace; border-radius: 25px; text-decoration: none;">_Not Running? Try: IOS Version_</a>
-	
+	<a href="YoutubeIOS.html" style="background-color: black; color: grey; border: 2px solid white; font-family: Monospace; border-radius: 25px; text-decoration: none;">_Not Running? Try: IOS Version_</a>
+	<br/>
+	<button onclick='onVideoPlayButtonClick()'>play</button>
+	<button onclick='onVideoPauseButtonClick()'>pause</button>
 	
 </div>	
 
@@ -45,6 +49,13 @@ var mesh1;
 
 initialize();
 animate();
+
+function onVideoPlayButtonClick(){
+		video.play()
+	}
+function onVideoPauseButtonClick(){
+		video.pause()
+	}
 
 function initialize()
 {
@@ -127,6 +138,8 @@ function initialize()
 	
 
 	let geometry1 = new THREE.PlaneBufferGeometry(2,2, 4,4);
+	
+	
 
 	let video = document.getElementById( 'video' );
 	let texture = new THREE.VideoTexture( video );

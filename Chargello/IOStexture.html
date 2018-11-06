@@ -12,14 +12,13 @@
 	<script src="threex/threex-artoolkitcontext.js"></script>
 	<script src="threex/threex-arbasecontrols.js"></script>
 	<script src="threex/threex-armarkercontrols.js"></script>
+	<script src='videotexture/vendor/three.js/examples/js/libs/stats.min.js'></script>
+	<script src='videotexture/threex.videotexture.js'></script>
+	
 </head>
 
 <body style='margin : 0px; overflow: hidden; font-family: Monospace;'>
 
-<video id="video" autoplay loop crossOrigin="anonymous" webkit-playsinline style="display:none">
-	
-	<source src="video/chargello_02.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
-</video>
 <div style='position: absolute; top: 10px; width:100%; text-align: center; z-index: 1; background-color: black; color: white;'>
 	<a>Chargello</a> 
 	<br/>
@@ -28,8 +27,9 @@
 	<a href="https://www.instagram.com/chargello/?hl=es-la" style="background-color: #C71585; color: white; border: 2px solid #C71585; font-family: Monospace; border-radius: 25px; text-decoration: none;">Instagram</a>
 	<br>
 	<br>
-	<a href="videoopcion2texture.html" style="background-color: black; color: grey; border: 2px solid white; font-family: Monospace; border-radius: 25px; text-decoration: none;">_Not Running? Try: IOS Version_</a>
-	
+	<a href="YoutubeIOS.html" style="background-color: black; color: grey; border: 2px solid white; font-family: Monospace; border-radius: 25px; text-decoration: none;">_Not Running? Try: IOS Version_</a>
+	<button onclick='onVideoPlayButtonClick()'>play</button>
+	<button onclick='onVideoPauseButtonClick()'>pause</button>
 	
 </div>	
 
@@ -66,6 +66,7 @@ function initialize()
 	renderer.domElement.style.top = '0px'
 	renderer.domElement.style.left = '0px'
 	document.body.appendChild( renderer.domElement );
+	var updateFcts	= [];
 
 	clock = new THREE.Clock();
 	deltaTime = 0;
@@ -123,7 +124,40 @@ function initialize()
 	let markerControls1 = new THREEx.ArMarkerControls(arToolkitContext, markerRoot1, {
 		type: 'pattern', patternUrl: "data/pattern-marker.patt",
 	})
+	var canPlayMp4	= document.createElement('video').canPlayType('video/mp4') !== '' ? true : false
+	var canPlayOgg	= document.createElement('video').canPlayType('video/ogg') !== '' ? true : false
+	if( canPlayMp4 ){
+		var url	= 'video/chargello_02.mp4'
+	}else if( canPlayOgg ){
+		var url	= 'video/chargello_02.mp4'
+	}else	alert('cant play mp4 or ogv')
 
+	// create the videoTexture
+	var videoTexture= new THREEx.VideoTexture(url)
+	var record	= videoTexture.record
+	updateFcts.push(function(delta, now){
+		videoTexture.update(delta, now)
+	})
+
+	var geometry	= new THREE.CubeGeometry(1,1,1);
+	var material	= new THREE.MeshBasicMaterial({
+		map	: videoTexture.texture
+	});
+	var mesh	= new THREE.Mesh( geometry, material );
+	scene.add( mesh );
+	updateFcts.push(function(delta, now){
+				
+	})
+
+
+	function onVideoPlayButtonClick(){
+		video.play()
+	}
+	function onVideoPauseButtonClick(){
+		video.pause()
+	}
+	
+	// use the texture in a THREE.Mesh
 	
 
 	let geometry1 = new THREE.PlaneBufferGeometry(2,2, 4,4);
