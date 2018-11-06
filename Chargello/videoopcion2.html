@@ -117,7 +117,7 @@ function initialize()
 	markerRoot1 = new THREE.Group();
 	scene.add(markerRoot1);
 	let markerControls1 = new THREEx.ArMarkerControls(arToolkitContext, markerRoot1, {
-		type: 'pattern', patternUrl: "data/hiro.patt",
+		type: 'pattern', patternUrl: "data/pattern-marker.patt",
 	})
 
 	
@@ -160,11 +160,13 @@ function initialize()
 	let materialinstagram = new THREE.MeshLambertMaterial({ 
 		map: instagramtexture
 	});
-
+	
 	var mesh7 = new THREE.Mesh( geometry, material  );
 	mesh7.position.z	= 1.6;
 	mesh7.position.x = 1;
 	markerRoot1.add( mesh7 );
+	
+	
 
 	var mesh8 = new THREE.Mesh( geometry, material  );
 	mesh8.position.z	= 1.6;
@@ -226,6 +228,7 @@ function animate()
 }
 
 </script>
-
+<a href="videotexture.html" style="background-color: black; color: grey; border: 2px solid white; font-family: Monospace;">IOS Version</a>
+<a href="css3d_youtube.html" style="background-color: black; color: grey; border: 2px solid white; font-family: Monospace;">IOS Version 2</a>
 </body>
 </html>
