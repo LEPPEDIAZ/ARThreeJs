@@ -131,3 +131,8 @@ a:hover .superImage
 	text-align: center;
 	text-shadow: -1px -1px 2px #fff, 1px 1px 3px #000;	
 }
+@font-face {
+    font-family: LEIXO-Regular;
+    font-weight: bold;
+    src: url("fondo/LEIXO-Regular.otf") format("opentype");
+}

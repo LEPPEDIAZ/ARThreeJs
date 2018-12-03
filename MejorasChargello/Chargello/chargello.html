@@ -46,16 +46,16 @@
 
 </video>
 
-<div style='position: absolute; top: 10px; width:100%; text-align: center; z-index: 1; background-color: black; color: white;'>
+<div style='position: absolute; top: 10px; width:100%; text-align: center; z-index: 1; background-color: none;'>
 
 
-
-	<a><img src="models/logo.png" height="30" align="middle" style="width: 200px; justify-content: center; align-self: center;"/> </a> 
+    <a href="menu.html"><img src="fondo/spr_main_menu.png" height="70" align="left" style="width: 70px; justify-content: center; align-self: left;"/> </a> 
+	
 
 	<br/>
 
 	<br>
-
+   
 	<a href="https://www.facebook.com/Chargello/" style=" font-family: Monospace; border-radius: 25px; text-decoration: none;"> <img src="models/spr_target_oatly_bnt_facebook.png" height="30"  align="middle" style="width:30px; justify-content: center; align-self: center;"/></a>
 
 	<a href="https://www.instagram.com/chargello/?hl=es-la" style=" font-family: Monospace; border-radius: 25px; text-decoration: none;"> <img src="models/spr_target_oatly_btn_instagram.png" height="30"  align="middle" style="width:30px; justify-content: center; align-self: center;"/></a>
@@ -98,17 +98,11 @@ var markerRoot1;
 
 var mesh1;
 
-var onRenderFcts= [];
-
-var obj;
-
-var myObj2;
-
 
 
 initialize();
 
-
+animate();
 
 
 
@@ -190,8 +184,6 @@ function initialize()
 
 	});
 
-	
-
 
 
 	function onResize()
@@ -250,11 +242,6 @@ function initialize()
 
 	});
 
-	onRenderFcts.push(function(){
-		if( arToolkitSource.ready === false )	return
-
-		arToolkitContext.update( arToolkitSource.domElement )
-	})
 	
 
 	// copy projection matrix to camera when initialization complete
@@ -438,26 +425,25 @@ function initialize()
         if ( child instanceof THREE.Mesh )
             child.material.color.setRGB (255,255,0);
     });
+
+		myObj = obj;
 		obj.scale.set(1.5,1.5,1.5);
 		obj.rotation.z += 110;
 		obj.rotation.x += 90;
 		obj.position.z += 2;
 		markerRoot1.add( obj );
 	} );
-	
-	onRenderFcts.push(function(){
-		obj.rotation.x += 0.1;
-		
-	})
 
-	onRenderFcts.push(function(){
-		renderer.render( scene, camera );
-		stats.update();
-	})
+
+
+	
 
 	
 
 }
+
+
+
 
 
 function update()
@@ -484,26 +470,25 @@ function render()
 
 }
 
-onRenderFcts.push(function(){
-		renderer.render( scene, camera );
-		stats.update();
-	})
 
 
 
-var lastTimeMsec= null
-requestAnimationFrame(function animate(nowMsec){
-		// keep looping
-	requestAnimationFrame( animate );
-		// measure time
-	lastTimeMsec	= lastTimeMsec || nowMsec-1000/2
-	var deltaMsec	= Math.min(2, nowMsec - lastTimeMsec)
-	lastTimeMsec	= nowMsec
-		// call each update function
-	onRenderFcts.forEach(function(onRenderFct){
-		onRenderFct(deltaMsec/10, nowMsec/10)
-	})
-})
+
+function animate()
+
+{
+
+	requestAnimationFrame(animate);
+
+	deltaTime = clock.getDelta();
+
+	totalTime += deltaTime;
+
+	update();
+
+	render();
+
+}
 
 
 
