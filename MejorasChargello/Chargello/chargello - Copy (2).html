@@ -10,6 +10,7 @@
 
 	<script src='js/three.js'></script>
 	
+    
 	<!-- include jsartookit -->
 
 	<script src="jsartoolkit5/artoolkit.min.js"></script>
@@ -42,6 +43,8 @@
    
 }
 
+
+
    
 
 
@@ -63,7 +66,7 @@
 <div style='position: absolute; top: 10px; width:100%; text-align: center; z-index: 1; background-color: none;'>
 
 
-    <a href="menu.html"><img src="fondo/spr_main_menu.png" height="70" align="left" style="width: 70px; justify-content: center; align-self: left;"/> </a> 
+    <a href="menu1.html"><img src="fondo/spr_main_menu.png" height="70" align="left" style="width: 70px; justify-content: center; align-self: left;"/> </a> 
 	
 
 	<br/>
@@ -88,19 +91,27 @@
 
 	<button style="background-color: black; color: #00BFFF; border: 2px solid #00BFFF; font-family: Monospace; border-radius: 25px; text-decoration: none;" onclick='onVideoPauseButtonClick()'>PAUSE</button>
 
+	<br> </br>
+	<br> </br>
+	<div type="button" id="toggler"  onClick="action();" style="width: 600px; height: 600px; position: fixed; top: 20% ; left: 35%; background: url('images/tutorial.png');  background-repeat: no-repeat; background-size: contain; margin: none;"> 
+
+	</div>
 	
 
 </div>	
-    <div id>
-            <a id="tutorial" onclick="disablefirstbutton()" height="300" align="left" style="width: 300px; position: fixed; top: 20% ; left: 35%" ><img src="images/tutorial.png" />
-           
-            </a>
+    <div >
+            
             
 
-            
-              
+        
+	</div>
 
-    </div>
+
+
+
+	
+
+
 
     
 
@@ -145,6 +156,16 @@ function onVideoPauseButtonClick(){
 		video.pause()
 
 	}
+
+var hidden = false;
+function action() {
+     hidden = !hidden;
+    if(hidden) {
+        document.getElementById('toggler').style.visibility = 'hidden';
+    } else {
+        document.getElementById('toggler').style.visibility = 'visible';
+    }
+}
 
 
 

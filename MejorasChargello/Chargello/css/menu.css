@@ -1,0 +1,25 @@
+.parent{
+    background-image:url(http://placecorgi.com/400/300);
+    height:500px;
+    position:relative;
+    background-size:cover;
+  }
+  .overlay{
+    background-color:rgba(0,0,0,.5);
+    color:white;
+    border:solid 1px white;
+    position:absolute;
+    left:0;
+    top:0;
+    right:0;
+    bottom:0;
+    margin:auto;
+    width:80%;
+    height:80%;
+    /*animate*/
+    transition:all .3s ease-in;
+  }
+  /* hover effect*/
+  .parent:hover .overlay{
+    opacity:0;
+  }
