@@ -500,11 +500,32 @@ function initialize()
     leftDiv.id = "left"; //Assign div id
     a = document.createElement('a');
     a.href =  'https://www.facebook.com/Chargello/'; // Insted of calling setAttribute 
-    a.innerHTML = "Link" // <a>INNER_TEXT</a>
+    a.innerHTML = " " // <a>INNER_TEXT</a>
     leftDiv.appendChild(a); // Append the link to the div
+	image = document.createElement('img');
+	image.setAttribute("src", "models/spr_target_oatly_bnt_facebook.png");
+	image.setAttribute("height", "45%");
+	image.setAttribute("width", "45%");
+	a.appendChild(image)
     document.body.appendChild(leftDiv); // And append the div to the document body
 	var FacebookUrl = new THREE.CSS2DObject( leftDiv );
 	mesh3.add( FacebookUrl);
+
+
+	var leftDiv2 = document.createElement("div"); //Create left div
+    leftDiv2.id = "right"; //Assign div id
+    b = document.createElement('a');
+    b.href =  'https://www.instagram.com/chargello/?hl=es-la'; // Insted of calling setAttribute 
+    b.innerHTML = "" // <a>INNER_TEXT</a>
+    leftDiv2.appendChild(b); // Append the link to the div
+	image = document.createElement('img');
+	image.setAttribute("src", "models/spr_target_oatly_btn_instagram.png");
+	image.setAttribute("height", "45%");
+	image.setAttribute("width", "45%");
+	b.appendChild(image)
+    document.body.appendChild(leftDiv2); // And append the div to the document body
+	var FacebookUrl2 = new THREE.CSS2DObject( leftDiv2 );
+	mesh.add( FacebookUrl2);
 
 	
 
