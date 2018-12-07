@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+
+<head>
+
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
+	<title>Chargello</title>
+
+	<!-- include three.js library -->
+
+	<script src='js/three.js'></script>
+	
+	<script src="js/3Dink.js"></script>
+
+	<script src="js/renderers/CSS2DRenderer.js"></script>
+    
+	<!-- include jsartookit -->
+
+	<script src="jsartoolkit5/artoolkit.min.js"></script>
+
+	<script src="jsartoolkit5/artoolkit.api.js"></script>
+	
+	<!-- include threex.artoolkit -->
+
+	<script src="threex/threex-artoolkitsource.js"></script>
+
+	<script src="threex/threex-artoolkitcontext.js"></script>
+
+	<script src="threex/threex-arbasecontrols.js"></script>
+
+	<script src="threex/threex-armarkercontrols.js"></script>
+
+	<script src='videotexture/vendor/three.js/examples/js/libs/stats.min.js'></script>
+
+	<script src='videotexture/threex.videotexture.js'></script>
+
+</head>
+<script>
+    function removeDummy() {
+    var elem = document.getElementById('tutorial');
+    elem.parentNode.removeChild(elem);
+    return false;
+}
+    function disablefirstbutton() {
+    document.getElementById("tutorial").disabled = true;
+   
+}
+
+
+
+   
+
+
+</script>
+
+
+<body style='margin : 0px; overflow: hidden; font-family: Monospace;'>
+
+
+
+<video id="video" autoplay loop crossOrigin="anonymous" webkit-playsinline style="display:none">
+
+	
+
+	<source src="video/chargello_02.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+
+</video>
+
+<div style='position: absolute; top: 10px; width:100%; text-align: center; z-index: 1; background-color: none;'>
+
+
+    <a href="menu3.html"><img src="fondo/spr_main_menu.png" height="70" align="left" style="width: 70px; justify-content: center; align-self: left; display: inline-block;"/> </a> 
+	
+
+	<br/>
+
+	<br>
+
+	<br>
+
+	<br>
+
+	<button style="background-color: black; color: #00BFFF; border: 2px solid #00BFFF; font-family: Monospace; border-radius: 25px; text-decoration: none;" onclick='onVideoPlayButtonClick()'>PLAY</button>
+
+	<button style="background-color: black; color: #00BFFF; border: 2px solid #00BFFF; font-family: Monospace; border-radius: 25px; text-decoration: none;" onclick='onVideoPauseButtonClick()'>PAUSE</button>
+
+	<br> </br>
+	<br> </br>
+	<div type="button" id="toggler"  onClick="action();" style="display: inline-block; width: 70%; height: 70%; position: fixed; top: 20% ; left: 28%; background: url('images/tutorial.png');  background-repeat: no-repeat; background-size: contain; background-position: left; margin: none;"> 
+
+	</div>
+	
+
+</div>	
+    <div >
+            
+            
+
+        
+	</div>
+
+
+
+
+	
+
+
+
+    
+
+
+<script>
+
+
+
+var scene, camera, renderer, clock, deltaTime, totalTime;
+
+
+
+var arToolkitSource, arToolkitContext;
+
+
+
+var markerRoot1;
+
+
+
+var mesh1;
+
+
+var facebook, instagram;
+
+var labelRenderer;
+
+
+
+initialize();
+
+animate();
+
+function disablefirstbutton() {
+    document.getElementById("tutorial").disabled = true;
+   
+}
+
+function onVideoPlayButtonClick(){
+
+		video.play()
+
+	}
+
+function onVideoPauseButtonClick(){
+
+		video.pause()
+
+	}
+
+var hidden = false;
+function action() {
+     hidden = !hidden;
+    if(hidden) {
+        document.getElementById('toggler').style.visibility = 'hidden';
+    } else {
+        document.getElementById('toggler').style.visibility = 'visible';
+    }
+}
+
+
+
+function initialize()
+
+{
+
+	scene = new THREE.Scene();
+
+
+
+	let ambientLight = new THREE.AmbientLight( 0xcccccc, 0.5 );
+
+	scene.add( ambientLight );
+
+				
+
+	camera = new THREE.Camera();
+
+	scene.add(camera);
+
+
+
+	renderer = new THREE.WebGLRenderer({
+
+		antialias : true,
+
+		alpha: true
+
+	});
+
+	renderer.setPixelRatio( window.devicePixelRatio );
+	renderer.setSize( window.innerWidth, window.innerHeight );
+	document.body.appendChild( renderer.domElement );
+
+	labelRenderer = new THREE.CSS2DRenderer();
+	labelRenderer.setSize( window.innerWidth, window.innerHeight );
+	labelRenderer.domElement.style.position = 'absolute';
+	labelRenderer.domElement.style.top = 0;
+	document.body.appendChild( labelRenderer.domElement );
+
+
+
+	renderer.setClearColor(new THREE.Color('lightgrey'), 0)
+
+	renderer.setSize( 640, 480 );
+
+	renderer.domElement.style.position = 'absolute'
+
+	renderer.domElement.style.top = '0px'
+
+	renderer.domElement.style.left = '0px'
+
+	document.body.appendChild( renderer.domElement );
+
+
+
+	clock = new THREE.Clock();
+
+	deltaTime = 0;
+
+	totalTime = 0;
+
+	
+
+	////////////////////////////////////////////////////////////
+
+	// setup arToolkitSource
+
+	////////////////////////////////////////////////////////////
+
+
+
+	arToolkitSource = new THREEx.ArToolkitSource({
+
+		sourceType : 'webcam',
+
+	});
+
+
+
+	function onResize()
+
+	{
+
+		arToolkitSource.onResize()	
+
+		arToolkitSource.copySizeTo(renderer.domElement)	
+
+		if ( arToolkitContext.arController !== null )
+
+		{
+
+			arToolkitSource.copySizeTo(arToolkitContext.arController.canvas)	
+
+		}	
+
+	}
+
+
+
+	arToolkitSource.init(function onReady(){
+
+		onResize()
+
+	});
+
+	
+
+	// handle resize event
+
+	window.addEventListener('resize', function(){
+
+		onResize()
+
+	});
+
+	
+
+	////////////////////////////////////////////////////////////
+
+	// setup arToolkitContext
+
+	////////////////////////////////////////////////////////////	
+
+
+
+	// create atToolkitContext
+
+	arToolkitContext = new THREEx.ArToolkitContext({
+
+		cameraParametersUrl: 'data/camera_para.dat',
+
+		detectionMode: 'mono'
+
+	});
+
+	
+
+	// copy projection matrix to camera when initialization complete
+
+	arToolkitContext.init( function onCompleted(){
+
+		camera.projectionMatrix.copy( arToolkitContext.getProjectionMatrix() );
+
+	});
+
+
+
+	////////////////////////////////////////////////////////////
+
+	// setup markerRoots
+
+	////////////////////////////////////////////////////////////
+
+
+
+	// build markerControls
+
+	markerRoot1 = new THREE.Group();
+
+	scene.add(markerRoot1);
+
+	let markerControls1 = new THREEx.ArMarkerControls(arToolkitContext, markerRoot1, {
+
+		type: 'pattern', patternUrl: "data/pattern-marker.patt",
+
+	})
+
+
+
+	
+
+
+
+	let geometry1 = new THREE.PlaneBufferGeometry(2,2, 4,4);
+
+	
+
+	
+
+
+
+	let video = document.getElementById( 'video' );
+
+	let texture = new THREE.VideoTexture( video );
+
+	texture.minFilter = THREE.LinearFilter;
+
+	texture.magFilter = THREE.LinearFilter;
+
+	texture.format = THREE.RGBFormat;
+
+	let material1 = new THREE.MeshBasicMaterial( { map: texture } );
+
+	
+
+	mesh1 = new THREE.Mesh( geometry1, material1 );
+
+	//mesh1.rotation.x = -Math.PI/2;
+
+	mesh1.rotation.x = 149.5;
+
+	mesh1.rotation.z = -0.05;
+
+
+
+	markerRoot1.add( mesh1 );
+
+	
+
+	var geometry	= new THREE.CubeGeometry(0.5,0.5,0.5);
+
+	var material	= new THREE.MeshNormalMaterial({
+
+		transparent : true,
+
+		opacity: 0.15,
+
+		side: THREE.DoubleSide
+
+	});
+
+	
+
+	var geometry4 = new THREE.BoxGeometry(1,1,1);
+
+	
+
+	let loader = new THREE.TextureLoader();
+
+	let facebooktexture = loader.load( 'models/spr_target_oatly_bnt_facebook.png', render );
+
+
+
+	let materialfacebook = new THREE.MeshLambertMaterial({ 
+
+		map: facebooktexture
+
+	});
+
+
+
+	let loader2 = new THREE.TextureLoader();
+
+	let instagramtexture = loader2.load( 'models/spr_target_oatly_btn_instagram.png', render );
+
+
+
+	let materialinstagram = new THREE.MeshLambertMaterial({ 
+
+		map: instagramtexture
+
+	});
+
+	
+
+	var mesh7 = new THREE.Mesh( geometry, material  );
+
+	mesh7.position.z	= 1.6;
+
+	mesh7.position.x = 1;
+
+	markerRoot1.add( mesh7 );
+
+
+	var mesh9 = new THREE.Mesh( geometry, material  );
+
+	mesh9.position.z	= 1.6;
+
+	mesh9.position.x = 4.8;
+
+	markerRoot1.add( mesh9 );
+
+	
+
+	
+
+
+
+	var mesh8 = new THREE.Mesh( geometry, material  );
+
+	mesh8.position.z	= 1.6;
+
+	mesh8.position.x = -1;
+
+	markerRoot1.add( mesh8 );
+
+
+
+	var mesh = new THREE.Mesh( geometry, materialinstagram  );
+
+	mesh.position.z	= 1.6;
+
+	mesh.position.x = 1;
+
+	markerRoot1.add( mesh );
+
+
+
+	var geometry2	= new THREE.CubeGeometry(0.5,0.5,0.5);
+
+	var material2	= new THREE.MeshNormalMaterial({
+
+		transparent : true,
+
+		opacity: 0.5,
+
+		side: THREE.DoubleSide
+
+	});
+
+	var mesh3	= new THREE.Mesh( geometry2, materialfacebook );
+
+	mesh3.position.z	= 1.6;
+
+	mesh3.position.x = -1;
+
+	markerRoot1.add( mesh3 );
+
+
+	facebook = new THREE.Mesh(geometry2, materialfacebook );
+				scene.add( facebook );
+	instagram2 = new THREE.Mesh(geometry2, materialfacebook );
+				scene.add( instagram2 );
+
+	
+
+
+	//attach url
+	
+	var leftDiv = document.createElement("div"); //Create left div
+    leftDiv.id = "left"; //Assign div id
+    a = document.createElement('a');
+    a.href =  'https://www.facebook.com/Chargello/'; // Insted of calling setAttribute 
+    a.innerHTML = " " // <a>INNER_TEXT</a>
+    leftDiv.appendChild(a); // Append the link to the div
+	image = document.createElement('img');
+	image.setAttribute("src", "models/transparent.png");
+	image.setAttribute("height", "45%");
+	image.setAttribute("width", "45%");
+	a.appendChild(image)
+    document.body.appendChild(leftDiv); // And append the div to the document body
+	var FacebookUrl = new THREE.CSS2DObject( leftDiv );
+	mesh3.add( FacebookUrl);
+
+
+	var leftDiv2 = document.createElement("div"); //Create left div
+    leftDiv2.id = "right"; //Assign div id
+    b = document.createElement('a');
+    b.href =  'https://www.instagram.com/chargello/?hl=es-la'; // Insted of calling setAttribute 
+    leftDiv2.appendChild(b); // Append the link to the div
+	image = document.createElement('img');
+	image.setAttribute("src", "models/transparent.png");
+	image.setAttribute("height", "55%");
+	image.setAttribute("width", "55%");
+	b.appendChild(image)
+    document.body.appendChild(leftDiv2); // And append the div to the document body
+	var FacebookUrl2 = new THREE.CSS2DObject( leftDiv2 );
+	mesh9.add( FacebookUrl2);
+
+	
+
+	
+
+	var objecttwoLoader = new THREE.ObjectLoader();
+	objecttwoLoader.load( "models/goldstar.json", function ( obj ) {
+	//objectLoader.load( "models/gold-star.json", function ( obj ) {
+		obj.traverse( function ( child ) {
+        if ( child instanceof THREE.Mesh )
+            child.material.color.setRGB (255,255,0);
+    });
+
+		myObj = obj;
+		obj.scale.set(1.5,1.5,1.5);
+		obj.rotation.z += 110;
+		obj.rotation.x += 90;
+		obj.position.z += 2;
+		markerRoot1.add( obj );
+	} );
+
+	
+
+
+
+
+	
+
+	
+
+}
+
+
+
+
+
+function update()
+
+{
+
+	// update artoolkit on every frame
+
+	if ( arToolkitSource.ready !== false )
+
+		arToolkitContext.update( arToolkitSource.domElement );
+
+}
+
+
+
+
+
+function render()
+
+{
+
+	renderer.render( scene, camera );
+	
+
+}
+
+
+
+
+
+function animate()
+
+{
+
+	requestAnimationFrame(animate);
+
+	deltaTime = clock.getDelta();
+
+	totalTime += deltaTime;
+
+	renderer.render( scene, camera );
+	labelRenderer.render( scene, camera );
+
+	
+
+	
+
+	update();
+
+	render();
+
+}
+
+
+
+</script>
+
+
+
+</body>
+
+</html>
