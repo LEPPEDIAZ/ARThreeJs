@@ -435,9 +435,18 @@ function initialize()
 
 	mesh7.position.z	= 1.6;
 
-	mesh7.position.x = 1.5;
+	mesh7.position.x = 1;
 
 	markerRoot1.add( mesh7 );
+
+
+	var mesh9 = new THREE.Mesh( geometry, material  );
+
+	mesh9.position.z	= 1.6;
+
+	mesh9.position.x = 1.8;
+
+	markerRoot1.add( mesh9 );
 
 	
 
@@ -459,7 +468,7 @@ function initialize()
 
 	mesh.position.z	= 1.6;
 
-	mesh.position.x = 1.5;
+	mesh.position.x = 1;
 
 	markerRoot1.add( mesh );
 
@@ -521,11 +530,11 @@ function initialize()
 	image.setAttribute("src", "models/spr_target_oatly_btn_instagram.png");
 	image.setAttribute("height", "35%");
 	image.setAttribute("width", "35%");
-	image.setAttribute("margin-left", "45%");
+	image.setAttribute("margin-right", "45%");
 	b.appendChild(image)
     document.body.appendChild(leftDiv2); // And append the div to the document body
 	var FacebookUrl2 = new THREE.CSS2DObject( leftDiv2 );
-	mesh.add( FacebookUrl2);
+	mesh9.add( FacebookUrl2);
 
 	
 
