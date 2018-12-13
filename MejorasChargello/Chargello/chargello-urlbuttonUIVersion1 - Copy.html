@@ -139,6 +139,7 @@
 	<br/>
 
 
+
 	<br> </br>
 	<br> </br>
 	<div type="button" id="toggler"  onClick="action();" style="display: inline-block; width: 70%; height: 70%; position: fixed; top: 20% ; left: 18%; background: url('images/tutorial.png');  background-repeat: no-repeat; background-size: contain; background-position: left; margin: none;"> 
@@ -602,6 +603,22 @@ function initialize()
     document.body.appendChild(leftDiv2); // And append the div to the document body
 	var FacebookUrl2 = new THREE.CSS2DObject( leftDiv2 );
 	mesh.add( FacebookUrl2);
+
+	var leftDiv3 = document.createElement("div"); //Create left div
+    leftDiv3.id = "linktovideo"; //Assign div id
+    c = document.createElement('a');
+    c.href =  'https://res.cloudinary.com/dbmokzjuz/video/upload/v1544724306/chargello_02.mp4'; // Insted of calling setAttribute 
+    leftDiv3.appendChild(c); // Append the link to the div
+	image = document.createElement('img');
+	image.setAttribute("src", "models/spr_target_oatly_btn_instagram.png");
+	image.setAttribute("height", "100%");
+	image.setAttribute("width", "100%")
+	image.style.filter       = "alpha(opacity=.75)";
+	image.style.opacity      = 75;
+	c.appendChild(image)
+    document.body.appendChild(leftDiv3); // And append the div to the document body
+	var VideoUrl = new THREE.CSS2DObject( leftDiv3 );
+	mesh1.add( VideoUrl);
 
 	
 
