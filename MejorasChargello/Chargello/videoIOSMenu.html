@@ -1,8 +1,24 @@
 <!DOCTYPE html>
 
 <html lang="en">
+<style>
+body {
+		  align-self: left; 
+		  background: url("fondo/spr_fondo_01.png");
+
+		}
+
+button{
+	background-color: black ; color: white; border: 2px solid white; font-family: Monospace; border-radius: 25px; text-decoration: none;
+	width: 15%;
+	height: 8%;
+	top: 10% ; left: 5%;
+
+}
 
 
+
+</style>
 
 <head>
 
@@ -20,12 +36,9 @@
 <body>
 
 	
+	<div class="video-container"   style="display: inline-block; width: 70%; height: 70%; position: fixed; top: 10% ; left: 5%; background-repeat: no-repeat; background-size: contain; background-position: left; margin: none;">
 
-
-
-	<div class="video-container">
-
-		<video playsinline src="video/chargello_02.mp4"></video>
+		<video playsinline src="video/chargello_02.mp4" height="100%" width="100%"></video>
 
 		<button class='play'>Play/pause</button>
 
@@ -34,26 +47,6 @@
 		
 
 	</div>
-
-
-
-	<div class="video-container">
-
-		<video autoplay muted loop playsinline src="video/chargello_02.mp4"></video>
-
-		<button class='play'>Play/pause</button>
-
-		<button class='fullscreen'>Fullscreen</button>
-
-		
-
-	</div>
-
-
-
-	
-
-
 
 	<script src="js/index.js"></script>
 
