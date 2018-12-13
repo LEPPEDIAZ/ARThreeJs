@@ -139,9 +139,9 @@
 
 	<br/>
 
-	<button id="playvideo" style="background-color: none ; color: white; border: 2px solid white; font-family: Monospace; border-radius: 25px; text-decoration: none; opacity: 0.5; filter: alpha(opacity=50); width: 20%; height: 10%;" onclick='onVideoPlayButtonClick()'></button>
+	<button id="playvideo" style="background-color: none ; color: white; border: none; font-family: Monospace; border-radius: 25px; text-decoration: none; opacity: 0.5; filter: alpha(opacity=50); width: 25%; height: 10%;" onclick='onVideoPlayButtonClick()'></button>
 
-	<button  id="pausevideo" style="background-color: none; color: white; border: 2px solid white; font-family: Monospace; border-radius: 25px; text-decoration: none; opacity: 0.5; filter: alpha(opacity=50); width: 20%; height: 10%;" onclick='onVideoPauseButtonClick()'></button>
+	<button  id="pausevideo" style="background-color: none; color: white; border: none; font-family: Monospace; border-radius: 25px; text-decoration: none; opacity: 0.5; filter: alpha(opacity=50); width: 25%; height: 10%;" onclick='onVideoPauseButtonClick()'></button>
 
 	<br> </br>
 	<br> </br>
@@ -200,6 +200,8 @@ animate();
 
 document.getElementById('right').style.visibility = 'hidden';
 document.getElementById('left').style.visibility = 'hidden';
+document.getElementById('playvideo').style.visibility = 'hidden';
+document.getElementById('pausevideo').style.visibility = 'hidden';
 
 function myFunction() {
   document.getElementById("myDropdown").classList.toggle("show");
@@ -243,10 +245,14 @@ function action() {
 		document.getElementById('toggler').style.visibility = 'hidden';
 		document.getElementById('left').style.visibility = 'visible';
 		document.getElementById('right').style.visibility = 'visible';
+		document.getElementById('playvideo').style.visibility = 'visible';
+		document.getElementById('pausevideo').style.visibility = 'visible';
     } else {
 		document.getElementById('toggler').style.visibility = 'visible';
 		document.getElementById('left').style.visibility = 'hidden';
 		document.getElementById('right').style.visibility = 'hidden';
+		document.getElementById('playvideo').style.visibility = 'hidden';
+		document.getElementById('pausevideo').style.visibility = 'hidden';
     }
 }
 
