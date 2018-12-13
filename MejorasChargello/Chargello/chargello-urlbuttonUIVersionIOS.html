@@ -34,11 +34,20 @@
 
 	<script src='videotexture/threex.videotexture.js'></script>
 
+	<script src="js/iphone-inline-video.js"></script>
+
+
+
+	
+
 </head>
 <script>
     function removeDummy() {
     var elem = document.getElementById('tutorial');
-    elem.parentNode.removeChild(elem);
+	elem.parentNode.removeChild(elem);
+	
+	
+	
     return false;
 }
     function disablefirstbutton() {
@@ -194,6 +203,11 @@ initialize();
 
 animate();
 
+document.getElementById('linktovideo').style.visibility = 'hidden';
+document.getElementById('right').style.visibility = 'hidden';
+document.getElementById('left').style.visibility = 'hidden';
+
+
 function myFunction() {
   document.getElementById("myDropdown").classList.toggle("show");
 }
@@ -233,9 +247,17 @@ var hidden = false;
 function action() {
      hidden = !hidden;
     if(hidden) {
-        document.getElementById('toggler').style.visibility = 'hidden';
+		document.getElementById('toggler').style.visibility = 'hidden';
+		document.getElementById('linktovideo').style.visibility = 'visible';
+		document.getElementById('left').style.visibility = 'visible';
+		document.getElementById('right').style.visibility = 'visible';
+		
     } else {
-        document.getElementById('toggler').style.visibility = 'visible';
+		document.getElementById('toggler').style.visibility = 'visible';
+		document.getElementById('linktovideo').style.visibility = 'hidden';
+		document.getElementById('left').style.visibility = 'hidden';
+		document.getElementById('right').style.visibility = 'hidden';
+		
     }
 }
 
@@ -613,10 +635,9 @@ function initialize()
 	image.setAttribute("src", "models/spr_target_oatly_btn_instagram.png");
 	image.setAttribute("height", "100%");
 	image.setAttribute("width", "100%")
-	image.style.filter       = "alpha(opacity=.75)";
-	image.style.opacity      = 75;
+	image.style.filter = "alpha(opacity=0)";
+	image.style.opacity      = 0;
 	c.appendChild(image)
-    document.body.appendChild(leftDiv3); // And append the div to the document body
 	var VideoUrl = new THREE.CSS2DObject( leftDiv3 );
 	mesh1.add( VideoUrl);
 
