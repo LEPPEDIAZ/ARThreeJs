@@ -197,6 +197,10 @@ initialize();
 
 animate();
 
+document.getElementById('linktovideo').style.visibility = 'hidden';
+document.getElementById('right').style.visibility = 'hidden';
+document.getElementById('left').style.visibility = 'hidden';
+
 function myFunction() {
   document.getElementById("myDropdown").classList.toggle("show");
 }
@@ -236,9 +240,15 @@ var hidden = false;
 function action() {
      hidden = !hidden;
     if(hidden) {
-        document.getElementById('toggler').style.visibility = 'hidden';
+		document.getElementById('toggler').style.visibility = 'hidden';
+		document.getElementById('linktovideo').style.visibility = 'visible';
+		document.getElementById('left').style.visibility = 'visible';
+		document.getElementById('right').style.visibility = 'visible';
     } else {
-        document.getElementById('toggler').style.visibility = 'visible';
+		document.getElementById('toggler').style.visibility = 'visible';
+		document.getElementById('linktovideo').style.visibility = 'hidden';
+		document.getElementById('left').style.visibility = 'hidden';
+		document.getElementById('right').style.visibility = 'hidden';
     }
 }
 
