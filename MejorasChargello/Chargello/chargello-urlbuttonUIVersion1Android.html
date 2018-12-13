@@ -5,7 +5,7 @@
 
 	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 
-	<title>Chargello by Eyefly</title>
+	<title>Chargello</title>
 
 	<!-- include three.js library -->
 
@@ -139,9 +139,9 @@
 
 	<br/>
 
-	<button style="background-color: none ; color: white; border: 2px solid white; font-family: Monospace; border-radius: 25px; text-decoration: none;" onclick='onVideoPlayButtonClick()'>PLAY</button>
+	<button id="playvideo" style="background-color: none ; color: white; border: 2px solid white; font-family: Monospace; border-radius: 25px; text-decoration: none; opacity: 0.5; filter: alpha(opacity=50); width: 5%; height: 10%;" onclick='onVideoPlayButtonClick()'>PLAY</button>
 
-	<button style="background-color: none; color: white; border: 2px solid white; font-family: Monospace; border-radius: 25px; text-decoration: none;" onclick='onVideoPauseButtonClick()'>PAUSE</button>
+	<button  id="pausevideo" style="background-color: none; color: white; border: 2px solid white; font-family: Monospace; border-radius: 25px; text-decoration: none; opacity: 0.5; filter: alpha(opacity=50); width: 5%; height: 10%;" onclick='onVideoPauseButtonClick()'>PAUSE</button>
 
 	<br> </br>
 	<br> </br>
@@ -490,6 +490,22 @@ function initialize()
 
 	});
 
+	let playtexture = loader.load( 'models/spr_f_video_play.png', render );
+
+	let materialplay = new THREE.MeshLambertMaterial({ 
+
+	map: playtexture
+
+});
+
+	let pausetexture = loader.load( 'models/spr_f_video_pause.png', render );
+
+	let materialpause = new THREE.MeshLambertMaterial({ 
+
+	map: pausetexture
+
+	});
+
 
 
 	let loader2 = new THREE.TextureLoader();
@@ -513,6 +529,23 @@ function initialize()
 	mesh7.position.x = 1;
 
 	markerRoot1.add( mesh7 );
+
+
+	var mesh12 = new THREE.Mesh( geometry, materialplay );
+
+	mesh12.position.z	= -1.4;
+
+	mesh12.position.x = 0.76;
+
+	markerRoot1.add( mesh12 );
+
+	var mesh11 = new THREE.Mesh( geometry, materialpause   );
+
+	mesh11.position.z	= -1.4;
+
+	mesh11.position.x = -0.76;
+
+	markerRoot1.add( mesh11 );
 
 
 	var mesh9 = new THREE.Mesh( geometry, material  );
@@ -614,8 +647,14 @@ function initialize()
     document.body.appendChild(leftDiv2); // And append the div to the document body
 	var FacebookUrl2 = new THREE.CSS2DObject( leftDiv2 );
 	mesh.add( FacebookUrl2);
+	// add play and pause button attach to model
+	playvideo = document.getElementById("playvideo");
+	var PlayVideo = new THREE.CSS2DObject (playvideo)
+	mesh12.add( PlayVideo);
 
-	
+	pausevideo = document.getElementById("pausevideo");
+	var PauseVideo = new THREE.CSS2DObject (pausevideo)
+	mesh11.add( PauseVideo );
 
 	
 
