@@ -139,9 +139,9 @@
 
 	<br/>
 
-	<button id="playvideo" style="background-color: none ; color: white; border: none; font-family: Monospace; border-radius: 25px; text-decoration: none; opacity: 0.5; filter: alpha(opacity=50); width: 25%; height: 10%;" onclick='onVideoPlayButtonClick()'></button>
+	<button id="playvideo" style="background-color: none ; color: white; border: none; font-family: Monospace; border-radius: 25px; text-decoration: none; opacity: 0; filter: alpha(opacity=0); width: 25%; height: 10%; margin-right:3rem; " onclick='onVideoPlayButtonClick()'></button>
 
-	<button  id="pausevideo" style="background-color: none; color: white; border: none; font-family: Monospace; border-radius: 25px; text-decoration: none; opacity: 0.5; filter: alpha(opacity=50); width: 25%; height: 10%;" onclick='onVideoPauseButtonClick()'></button>
+	<button  id="pausevideo" style="background-color: none; color: white; border: none; font-family: Monospace; border-radius: 25px; text-decoration: none; opacity: 0; filter: alpha(opacity=0); width: 25%; height: 10%;" onclick='onVideoPauseButtonClick()'></button>
 
 	<br> </br>
 	<br> </br>
@@ -420,7 +420,7 @@ function initialize()
 
 	let markerControls1 = new THREEx.ArMarkerControls(arToolkitContext, markerRoot1, {
 
-		type: 'pattern', patternUrl: "data/pattern-marker.patt",
+		type: 'pattern', patternUrl: "data/Chargello.patt",
 
 	})
 
