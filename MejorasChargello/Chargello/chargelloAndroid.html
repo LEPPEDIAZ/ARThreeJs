@@ -62,22 +62,14 @@
 		  align-self: left; 
 		  background: url("fondo/spr_main_menu.png");
 		  background-repeat: no-repeat;
-    	  background-size: 3rem;
+    	  background-size: 5rem;
 		  height: 7rem;
 		  width: 7rem;
 
 		  
 		}
 		
-		.dropbtn:hover, .dropbtn:focus {
-			align-self: left; 
-			background: url("fondo/spr_main_menu.png");
-			background-repeat: no-repeat;
-    	  	background-size: 3rem;
-		
-			
-		}
-		
+	
 		.dropdown {
 		  align-self: left; 
 		}
@@ -104,6 +96,119 @@
 		  display: block;
 		  align-self: left; 
 		}
+		.toggler {
+			display: inline-block;
+			width: 70%;
+			height: 70%; 
+			position: fixed; 
+			top: 20% ; 
+			left: 15%; 
+			background: url('images/tutorial.png');  
+			background-repeat: no-repeat; 
+			background-size: contain; 
+			background-position: left; 
+			margin: none;
+			-webkit-animation: bgcolorchange 4s infinite; /* Chrome, Safari, Opera */ 
+  			animation: 4s infinite bgcolorchange;
+
+		}
+		@keyframes bgcolorchange {
+		0% {
+			width: 70%;
+			height: 70%; 
+			position: fixed; 
+			top: 20% ; 
+			left: 15%; 
+			background: url('images/tutorial.png');  
+			background-repeat: no-repeat; 
+			background-size: contain; 
+			background-position: left;
+		}
+		25% {
+			width: 70%;
+			height: 70%; 
+			position: fixed; 
+			top: 20% ; 
+			left: 15%; 
+			background: url('images/spr-anim-tutorialparte1_00072.png');  
+			background-repeat: no-repeat; 
+			background-size: contain; 
+			background-position: left;
+		}
+		50% {
+			width: 70%;
+			height: 70%; 
+			position: fixed; 
+			top: 20% ; 
+			left: 15%; 
+			background: url('images/tutorial.png');  
+			background-repeat: no-repeat; 
+			background-size: contain; 
+			background-position: left;
+		}
+		75% {
+			width: 70%;
+			height: 70%; 
+			position: fixed; 
+			top: 20% ; 
+			left: 15%; 
+			background: url('images/spr-anim-tutorialparte1_00072.png');  
+			background-repeat: no-repeat; 
+			background-size: contain; 
+			background-position: left;
+		}
+		100% {
+			width: 70%;
+			height: 70%; 
+			position: fixed; 
+			top: 20% ; 
+			left: 15%; 
+			background: url('images/tutorial.png');  
+			background-repeat: no-repeat; 
+			background-size: contain; 
+			background-position: left;
+		}
+		}
+		/* Chrome, Safari, Opera */
+		@-webkit-keyframes bgcolorchange {
+			0%   {width: 70%;
+			height: 70%; 
+			position: fixed; 
+			top: 20% ; 
+			left: 15%; 
+			background: url('images/tutorial.png');  
+			background-repeat: no-repeat; 
+			background-size: contain; 
+			background-position: left;}
+			25%  {width: 70%;
+			height: 70%; 
+			position: fixed; 
+			top: 20% ; 
+			left: 15%; 
+			background: url('images/spr-anim-tutorialparte1_00072.png');  
+			background-repeat: no-repeat; 
+			background-size: contain; 
+			background-position: left;}
+			75%  {width: 70%;
+			height: 70%; 
+			position: fixed; 
+			top: 20% ; 
+			left: 15%; 
+			background: url('images/spr-anim-tutorialparte1_00072.png');  
+			background-repeat: no-repeat; 
+			background-size: contain; 
+			background-position: left;}
+			100% {width: 70%;
+			height: 70%; 
+			position: fixed; 
+			top: 20% ; 
+			left: 15%; 
+			background: url('images/tutorial.png');  
+			background-repeat: no-repeat; 
+			background-size: contain; 
+			background-position: left;}
+		}
+
 		
 		.dropdown a:hover {background-color: #ddd;}
 		
@@ -119,16 +224,14 @@
 </video>
 
 <div class="dropdown" style='position: absolute;  text-align: center; z-index: 1; background-color: none;'>
-	<button onclick="myFunction()" class="dropbtn" style='background-color: black;' > </button>
+	<div onclick="myFunction()" class="dropbtn"  > </div>
 	<div id="myDropdown" class="dropdown-content">
 		<img src="fondo/spr_main_menu_logo.png" height="230" width="270" align="middle" style="width: 200px; justify-content: center; align-self: center;"/>
 		<br> </br>
 		<img src="fondo/spr_main_menu_links.png" height="30" width="25" align="middle" style=" justify-content: center; align-self: center;"/> 
-		<a href="#home">Mira mas de eyefly AR/VR</a>
+		<a href="http://eyeflyapps.com/">Mira mas de eyefly AR/VR</a>
 		<img src="fondo/spr_main_menu_links.png" height="30" width="25" align="middle" style=" justify-content: center; align-self: center;"/> 
-		<a href="#about">Tu marca aqui</a>
-		<img src="fondo/spr_main_menu_links.png" height="30" width="25" align="middle" style=" justify-content: center; align-self: center;"/> 
-		<a href="#contact">Contact</a>
+		<a href="http://eyeflyapps.com/contact-page/">Contact</a>
 	  </div>
 	</div>
 
@@ -145,7 +248,7 @@
 
 	<br> </br>
 	<br> </br>
-	<div type="button" id="toggler"  onClick="action();" style="display: inline-block; width: 70%; height: 70%; position: fixed; top: 20% ; left: 18%; background: url('images/tutorial.png');  background-repeat: no-repeat; background-size: contain; background-position: left; margin: none;"> 
+	<div type="button" id="toggler" class="toggler" onClick="action();"  > 
 
 	</div>
 </div>
@@ -203,8 +306,11 @@ document.getElementById('left').style.visibility = 'hidden';
 document.getElementById('playvideo').style.visibility = 'hidden';
 document.getElementById('pausevideo').style.visibility = 'hidden';
 
+
 function myFunction() {
   document.getElementById("myDropdown").classList.toggle("show");
+  
+
 }
 
 // Close the dropdown if the user clicks outside of it
@@ -253,6 +359,15 @@ function action() {
 		document.getElementById('right').style.visibility = 'hidden';
 		document.getElementById('playvideo').style.visibility = 'hidden';
 		document.getElementById('pausevideo').style.visibility = 'hidden';
+    }
+}
+function nobutton() {
+     hidden = !hidden;
+    if(hidden) {
+		document.getElementById('dropbtn').style.visibility = 'visible';
+	
+    } else {
+		document.getElementById('dropbtn').style.visibility = 'hidden';
     }
 }
 
