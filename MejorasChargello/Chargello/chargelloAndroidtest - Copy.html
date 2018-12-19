@@ -20,8 +20,6 @@
 	<script src="jsartoolkit5/artoolkit.min.js"></script>
 
 	<script src="jsartoolkit5/artoolkit.api.js"></script>
-
-	<script src="js/WebGL.js"></script>
 	
 	<!-- include threex.artoolkit -->
 
@@ -36,8 +34,6 @@
 	<script src='videotexture/vendor/three.js/examples/js/libs/stats.min.js'></script>
 
 	<script src='videotexture/threex.videotexture.js'></script>
-
-
 
 </head>
 <script>
@@ -265,46 +261,9 @@
 
 
     
-	<script type="x-shader/x-vertex" id="vertexshader">
-
-		attribute float size;
-
-		varying vec3 vColor;
-
-		void main() {
-
-			vColor = color;
-
-			vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
-
-			gl_PointSize = size * ( 300.0 / -mvPosition.z );
-
-			gl_Position = projectionMatrix * mvPosition;
-
-		}
-
-	</script>
-
-	<script type="x-shader/x-fragment" id="fragmentshader">
-
-		uniform sampler2D texture;
-
-		varying vec3 vColor;
-
-		void main() {
-
-			gl_FragColor = vec4( vColor, 1.0 );
-
-			gl_FragColor = gl_FragColor * texture2D( texture, gl_PointCoord );
-
-		}
-
-	</script>
 
 
 <script>
-
-
 
 
 
@@ -326,11 +285,6 @@ var mesh1;
 var facebook, instagram;
 
 var labelRenderer;
-
-var particleSystem, uniforms;
-
-var particles = 1500;
-
 
 
 
@@ -585,57 +539,8 @@ function initialize()
 
 	let geometry1 = new THREE.PlaneBufferGeometry(2,2, 4,4);
 
-	var radius = 200;
-
-	geometryparticle = new THREE.BufferGeometry();
-
-	var positions = [];
-	var colors = [];
-	var sizes = [];
-
-	var color = new THREE.Color();
-
-	for ( var i = 0; i < particles; i ++ ) {
-
-		positions.push( ( Math.random() * 2 - 1 ) * radius );
-		positions.push( ( Math.random() * 2 - 1 ) * radius );
-		positions.push( ( Math.random() * 2 - 1 ) * radius );
-
-		color.setHSL( i / particles, 1.0, 0.5 );
-
-		colors.push( color.r, color.g, color.b );
-
-		sizes.push( 20 );
-
-	}
-
-	geometryparticle.addAttribute( 'position', new THREE.Float32BufferAttribute( positions, 3 ) );
-	geometryparticle.addAttribute( 'color', new THREE.Float32BufferAttribute( colors, 3 ) );
-	geometryparticle.addAttribute( 'size', new THREE.Float32BufferAttribute( sizes, 1 ).setDynamic( true ) );
-
-	uniforms = {
-
-		texture: { value: new THREE.TextureLoader().load( "models/spark1.png" ) }
-
-		};
-
-		var shaderMaterial = new THREE.ShaderMaterial( {
-
-		uniforms: uniforms,
-		vertexShader: document.getElementById( 'vertexshader' ).textContent,
-		fragmentShader: document.getElementById( 'fragmentshader' ).textContent,
-
-		blending: THREE.AdditiveBlending,
-		depthTest: false,
-		transparent: true,
-		vertexColors: true
-
-		} );
-
 	
-	particleSystem = new THREE.Points( geometryparticle, shaderMaterial );
 
-	markerRoot1.add( particleSystem );
 	
 
 
