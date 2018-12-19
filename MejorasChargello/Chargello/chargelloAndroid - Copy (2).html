@@ -573,7 +573,10 @@ function initialize()
 
 	markerRoot1.add( mesh1 );
 
-	
+	var textureplane, materialplane, plane;
+
+	textureplane = THREE.ImageUtils.loadTexture( "models/spr_target_oatly_bnt_facebook.png" );
+
 
 	var geometry	= new THREE.CubeGeometry(0.5,0.5,0.5);
 
@@ -587,7 +590,30 @@ function initialize()
 
 	});
 
+	var geometrycylinder = new THREE.CubeGeometry(0.5,0.5,0.5);
+	var aFaces = geometrycylinder.faces.length;
+	console.log(geometrycylinder.faces.length);
+	for(var i=0;i<aFaces;i++) {
+	if(i < 64){
+		geometrycylinder.faces[i].materialIndex = 0;
+	}else if(i > 63 && i < 96){
+		geometrycylinder.faces[i].materialIndex = 1;
+	}else{
+		geometrycylinder.faces[i].materialIndex = 3;
+	}
+	}
+
+
+	var materialTop = new THREE.MeshPhongMaterial({transparent : true});
+	var materialSide = new THREE.MeshPhongMaterial({transparent : true});
+	var materialBack = new THREE.MeshPhongMaterial({transparent : true});
+	var materialsArray = [];
+	materialsArray.push(materialTop); //materialindex = 0
+	materialsArray.push(materialSide); // materialindex = 1
+	materialsArray.push(materialBack); // materialindex = 1
+	var material = new THREE.MeshFaceMaterial(materialsArray);
 	
+
 
 	var geometry4 = new THREE.BoxGeometry(1,1,1);
 
@@ -739,12 +765,13 @@ function initialize()
 	image.setAttribute("height", "100%");
 	image.setAttribute("width", "100%");
 	//image.style.filters.alpha.opacity=90 //IE4 syntax        //NS6 syntax
-	image.style.filter       = "alpha(opacity=0)";
-	image.style.opacity      = 0;
+	image.style.filter       = "alpha(opacity=75)";
+	image.style.opacity      = 75;
 	a.appendChild(image)
     document.body.appendChild(leftDiv); // And append the div to the document body
 	var FacebookUrl = new THREE.CSS2DObject( leftDiv );
-	mesh3.add( FacebookUrl);
+	var imagefacebook = mesh3.add( FacebookUrl);
+	markerRoot1.add(imagefacebook);
 
 
 	var leftDiv2 = document.createElement("div"); //Create left div
@@ -756,20 +783,24 @@ function initialize()
 	image.setAttribute("src", "models/spr_target_oatly_btn_instagram.png");
 	image.setAttribute("height", "100%");
 	image.setAttribute("width", "100%")
-	image.style.filter       = "alpha(opacity=0)";
-	image.style.opacity      = 0;
+	image.style.filter       = "alpha(opacity=75)";
+	image.style.opacity      = 75;
 	b.appendChild(image)
     document.body.appendChild(leftDiv2); // And append the div to the document body
 	var FacebookUrl2 = new THREE.CSS2DObject( leftDiv2 );
-	mesh.add( FacebookUrl2);
+	var imageinstagram = mesh.add( FacebookUrl2);
+	markerRoot1.add(imageinstagram);
 	// add play and pause button attach to model
 	playvideo = document.getElementById("playvideo");
 	var PlayVideo = new THREE.CSS2DObject (playvideo)
-	mesh12.add( PlayVideo);
+	var play = mesh12.add( PlayVideo);
+	markerRoot1.add(PlayVideo);
+
 
 	pausevideo = document.getElementById("pausevideo");
 	var PauseVideo = new THREE.CSS2DObject (pausevideo)
-	mesh11.add( PauseVideo );
+	var pause = mesh11.add( PauseVideo );
+	markerRoot1.add(PauseVideo);
 
 	
 
