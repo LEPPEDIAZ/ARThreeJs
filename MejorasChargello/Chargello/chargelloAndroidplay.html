@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+
+
+<head>
+
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
+	<title>Chargello</title>
+
+	<!-- include three.js library -->
+
+	<script src='js/three.js'></script>
+	
+	<script src="js/3Dink.js"></script>
+
+	<script src="js/renderers/CSS2DRenderer.js"></script>
+    
+	<!-- include jsartookit -->
+
+	<script src="jsartoolkit5/artoolkit.min.js"></script>
+
+	<script src="jsartoolkit5/artoolkit.api.js"></script>
+
+	<script src="js/WebGL.js"></script>
+	
+	<!-- include threex.artoolkit -->
+
+	<script src="threex/threex-artoolkitsource.js"></script>
+
+	<script src="threex/threex-artoolkitcontext.js"></script>
+
+	<script src="threex/threex-arbasecontrols.js"></script>
+
+	<script src="threex/threex-armarkercontrols.js"></script>
+
+	<script src='videotexture/vendor/three.js/examples/js/libs/stats.min.js'></script>
+
+	<script src='videotexture/threex.videotexture.js'></script>
+
+
+
+</head>
+<script>
+    function removeDummy() {
+    var elem = document.getElementById('tutorial');
+    elem.parentNode.removeChild(elem);
+    return false;
+}
+    function disablefirstbutton() {
+    document.getElementById("tutorial").disabled = true;
+   
+}
+
+
+
+   
+
+
+</script>
+
+
+<body style='margin : 0px; overflow: hidden; font-family: Monospace;'>
+
+
+	<style>
+
+		body {
+			font-family: LEIXO;
+    		src: url("fondo/LEIXO-Regular.otf") format("OpenType Layout");
+
+		}
+
+		@font-face {
+		font-family: LEIXO;
+		src: url("path/LEIXO-Regular.otf") format("OpenType Layout");
+		}
+
+		.dropbtn {
+		  align-self: left; 
+		  background: url("fondo/spr_main_menu.png");
+		  background-repeat: no-repeat;
+    	  background-size: 3rem;
+		  height: 10rem;
+		  width: 5rem;
+		  
+
+		  
+		}
+		@font-face {
+			font-family: LEIXO;
+    		src: url("fondo/LEIXO-Regular.otf");
+	}
+
+		@font-face {
+			font-family: LEIXO;
+    		src: url("fondo/LEIXO-Regular.otf");
+			font-weight: bold;
+		}
+
+		* {
+		font-family: LEIXO;
+		}
+	
+		.dropdown {
+		  align-self: left; 
+		}
+		
+		.dropdown-content {
+		  display: none;
+		  position: absolute;
+		  background: url("fondo/spr_fondo_01.png");
+		  min-width: 100vw;
+		  min-height: 100vh;
+		  height: auto;
+		  width: auto;
+		  overflow: auto;
+		  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+		  z-index: 1;
+		  align-self: left; 
+		  font-size: 200%;
+		}
+		
+		.dropdown-content a {
+		  color: black;
+		  padding: 12px 16px;
+		  text-decoration: none;
+		  display: block;
+		  align-self: left; 
+		}
+		.toggler {
+			display: inline-block;
+			width: 70%;
+			height: 70%; 
+			position: fixed; 
+			top: 20% ; 
+			left: 15%; 
+			background: url('images/tutorial.png');  
+			background-repeat: no-repeat; 
+			background-size: contain; 
+			background-position: left; 
+			margin: none;
+			-webkit-animation: bgcolorchange 4s infinite; /* Chrome, Safari, Opera */ 
+  			animation: 4s infinite bgcolorchange;
+
+		}
+		@keyframes bgcolorchange {
+		0% {
+			width: 70%;
+			height: 70%; 
+			position: fixed; 
+			top: 20% ; 
+			left: 15%; 
+			background: url('images/tutorial.png');  
+			background-repeat: no-repeat; 
+			background-size: contain; 
+			background-position: left;
+		}
+		25% {
+			width: 70%;
+			height: 70%; 
+			position: fixed; 
+			top: 20% ; 
+			left: 15%; 
+			background: url('fondo/bitmap.png');  
+			background-repeat: no-repeat; 
+			background-size: contain; 
+			background-position: left;
+		}
+		50% {
+			width: 70%;
+			height: 70%; 
+			position: fixed; 
+			top: 20% ; 
+			left: 15%; 
+			background: url('images/tutorial.png');  
+			background-repeat: no-repeat; 
+			background-size: contain; 
+			background-position: left;
+		}
+		
+		}
+		/* Chrome, Safari, Opera */
+		@-webkit-keyframes bgcolorchange {
+			0%   {width: 70%;
+			height: 70%; 
+			position: fixed; 
+			top: 20% ; 
+			left: 15%; 
+			background: url('images/tutorial.png');  
+			background-repeat: no-repeat; 
+			background-size: contain; 
+			background-position: left;}
+			25%  {width: 70%;
+			height: 70%; 
+			position: fixed; 
+			top: 20% ; 
+			left: 15%; 
+			background: url('fondo/bitmap.png');  
+			background-repeat: no-repeat; 
+			background-size: contain; 
+			background-position: left;}
+			
+		}
+
+		
+		.dropdown a:hover {background-color: #ddd;}
+		
+		.show {display: block;}
+		</style>
+
+<video id="video" autoplay loop crossOrigin="anonymous" webkit-playsinline style="display:none">
+
+	
+
+	<source src="video/chargello_02.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+
+</video>
+
+<div class="dropdown" style='position: absolute;  text-align: center; z-index: 1; background-color: none;'>
+	<div onclick="myFunction()" class="dropbtn"  >
+	<div id="myDropdown" class="dropdown-content">
+		<img src="fondo/spr_main_menu_cerrar.png" height="10%" width="10%" align="left" />
+		<br> </br>
+		<img src="fondo/spr_main_menu_logo.png"  align="middle" style="justify-content: center; align-self: center; display: inline-block; height: auto; width: auto; min-width:0.01vw ; min-height: 0.01vh; "/>
+		<br> </br>
+		<br> </br>
+		<a href="http://eyeflyapps.com/" style="font-family:LEIXO; color: #606060; font-size:45%;"> <img src="fondo/spr_main_menu_links.png" height="30" width="30" style=" justify-content: center; align-self: center; display: inline-block;"></img> mira mas de eyefly ar/vr</a>
+		<a href="http://eyeflyapps.com/contact-page/" style="font-family:LEIXO; color: #606060; font-size:45%;"> <img src="fondo/spr_main_menu_links.png" height="30" width="30" style=" justify-content: center; align-self: center; display: inline-block;"></img> contact</a>
+		
+	</div>
+	  </div>
+	</div>
+
+	<div style='position: absolute; top: 10px; width:100%; text-align: center; z-index: 1; background-color: none;'>
+     
+	
+	
+
+	<br/>
+
+	<button id="playvideo" style="background-color: none ; color: white; border: none; font-family: Monospace; border-radius: 25px; text-decoration: none; opacity: 0; filter: alpha(opacity=0); width: 25%; height: 10%; margin-right:3rem; " onclick='onVideoPlayButtonClick()'></button>
+
+	<button  id="pausevideo" style="background-color: none; color: white; border: none; font-family: Monospace; border-radius: 25px; text-decoration: none; opacity: 0; filter: alpha(opacity=0); width: 25%; height: 10%;" onclick='onVideoPauseButtonClick()' ></button>
+
+	<br> </br>
+	<br> </br>
+	<div type="button" id="toggler" class="toggler" onClick="action();"  > 
+
+	</div>
+</div>
+
+</div>	
+    <div >
+            
+            
+
+        
+	</div>
+
+
+
+
+	
+
+
+
+    
+	<script type="x-shader/x-vertex" id="vertexshader">
+
+		attribute float size;
+
+		varying vec3 vColor;
+
+		void main() {
+
+			vColor = color;
+
+			vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
+
+			gl_PointSize = size * ( 300.0 / -mvPosition.z );
+
+			gl_Position = projectionMatrix * mvPosition;
+
+		}
+
+	</script>
+
+	<script type="x-shader/x-fragment" id="fragmentshader">
+
+		uniform sampler2D texture;
+
+		varying vec3 vColor;
+
+		void main() {
+
+			gl_FragColor = vec4( vColor, 1.0 );
+
+			gl_FragColor = gl_FragColor * texture2D( texture, gl_PointCoord );
+
+		}
+
+	</script>
+
+
+<script>
+
+
+
+
+
+var scene, camera, renderer, clock, deltaTime, totalTime;
+
+
+
+var arToolkitSource, arToolkitContext;
+
+
+
+var markerRoot1;
+
+
+
+var mesh1;
+
+
+var facebook, instagram;
+
+var labelRenderer;
+
+var particleSystem, uniforms;
+
+var particles = 1500;
+
+
+
+
+initialize();
+
+animate();
+
+
+document.getElementById('right').style.visibility = 'hidden';
+document.getElementById('left').style.visibility = 'hidden';
+document.getElementById('playvideo').style.visibility = 'hidden';
+document.getElementById('pausevideo').style.visibility = 'hidden';
+
+
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+  
+
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+
+function disablefirstbutton() {
+    document.getElementById("tutorial").disabled = true;
+   
+}
+
+function onVideoPlayButtonClick(){
+
+		video.play()
+	
+
+	}
+
+function onVideoPauseButtonClick(){
+
+		video.pause()
+	
+	
+
+	}
+
+var hidden = false;
+function action() {
+     hidden = !hidden;
+    if(hidden) {
+		document.getElementById('toggler').style.visibility = 'hidden';
+		document.getElementById('left').style.visibility = 'visible';
+		document.getElementById('right').style.visibility = 'visible';
+		document.getElementById('playvideo').style.visibility = 'visible';
+		document.getElementById('pausevideo').style.visibility = 'visible';
+    } else {
+		document.getElementById('toggler').style.visibility = 'visible';
+		document.getElementById('left').style.visibility = 'hidden';
+		document.getElementById('right').style.visibility = 'hidden';
+		document.getElementById('playvideo').style.visibility = 'hidden';
+		document.getElementById('pausevideo').style.visibility = 'hidden';
+    }
+}
+function nobutton() {
+     hidden = !hidden;
+    if(hidden) {
+		document.getElementById('dropbtn').style.visibility = 'visible';
+	
+    } else {
+		document.getElementById('dropbtn').style.visibility = 'hidden';
+    }
+}
+
+
+
+function initialize()
+
+{
+
+	scene = new THREE.Scene();
+
+
+
+	let ambientLight = new THREE.AmbientLight( 0xcccccc, 0.5 );
+
+	scene.add( ambientLight );
+
+				
+
+	camera = new THREE.Camera();
+
+	scene.add(camera);
+
+
+
+	renderer = new THREE.WebGLRenderer({
+
+		antialias : true,
+
+		alpha: true
+
+	});
+
+	renderer.setPixelRatio( window.devicePixelRatio );
+	renderer.setSize( window.innerWidth, window.innerHeight );
+	document.body.appendChild( renderer.domElement );
+
+	labelRenderer = new THREE.CSS2DRenderer();
+	labelRenderer.setSize( window.innerWidth, window.innerHeight );
+	labelRenderer.domElement.style.position = 'absolute';
+	labelRenderer.domElement.style.top = 0;
+	document.body.appendChild( labelRenderer.domElement );
+
+
+
+	renderer.setClearColor(new THREE.Color('lightgrey'), 0)
+
+	renderer.setSize( 640, 480 );
+
+	renderer.domElement.style.position = 'absolute'
+
+	renderer.domElement.style.top = '0px'
+
+	renderer.domElement.style.left = '0px'
+
+	document.body.appendChild( renderer.domElement );
+
+
+
+	clock = new THREE.Clock();
+
+	deltaTime = 0;
+
+	totalTime = 0;
+
+	
+
+	////////////////////////////////////////////////////////////
+
+	// setup arToolkitSource
+
+	////////////////////////////////////////////////////////////
+
+
+
+	arToolkitSource = new THREEx.ArToolkitSource({
+
+		sourceType : 'webcam',
+
+	});
+
+
+
+	function onResize()
+
+	{
+
+		arToolkitSource.onResize()	
+
+		arToolkitSource.copySizeTo(renderer.domElement)	
+
+		if ( arToolkitContext.arController !== null )
+
+		{
+
+			arToolkitSource.copySizeTo(arToolkitContext.arController.canvas)	
+
+		}	
+
+	}
+
+
+
+	arToolkitSource.init(function onReady(){
+
+		onResize()
+
+	});
+
+	
+
+	// handle resize event
+
+	window.addEventListener('resize', function(){
+
+		onResize()
+
+	});
+
+	
+
+	////////////////////////////////////////////////////////////
+
+	// setup arToolkitContext
+
+	////////////////////////////////////////////////////////////	
+
+
+
+	// create atToolkitContext
+
+	arToolkitContext = new THREEx.ArToolkitContext({
+
+		cameraParametersUrl: 'data/camera_para.dat',
+
+		detectionMode: 'mono'
+
+	});
+
+	
+
+	// copy projection matrix to camera when initialization complete
+
+	arToolkitContext.init( function onCompleted(){
+
+		camera.projectionMatrix.copy( arToolkitContext.getProjectionMatrix() );
+
+	});
+
+
+
+	////////////////////////////////////////////////////////////
+
+	// setup markerRoots
+
+	////////////////////////////////////////////////////////////
+
+
+
+	// build markerControls
+
+	markerRoot1 = new THREE.Group();
+
+	scene.add(markerRoot1);
+
+	let markerControls1 = new THREEx.ArMarkerControls(arToolkitContext, markerRoot1, {
+
+		type: 'pattern', patternUrl: "data/marcadorlittle.patt",
+
+	})
+
+
+
+	
+
+
+
+	let geometry1 = new THREE.PlaneBufferGeometry(2,2, 4,4);
+
+	var radius = 200;
+
+	geometryparticle = new THREE.BufferGeometry();
+
+	var positions = [];
+	var colors = [];
+	var sizes = [];
+
+	var color = new THREE.Color();
+
+	for ( var i = 0; i < particles; i ++ ) {
+
+		positions.push( ( Math.random() * 2 - 1 ) * radius );
+		positions.push( ( Math.random() * 2 - 1 ) * radius );
+		positions.push( ( Math.random() * 2 - 1 ) * radius );
+
+		color.setHSL( i / particles, 1.0, 0.5 );
+
+		colors.push( color.r, color.g, color.b );
+
+		sizes.push( 20 );
+
+	}
+
+	geometryparticle.addAttribute( 'position', new THREE.Float32BufferAttribute( positions, 3 ) );
+	geometryparticle.addAttribute( 'color', new THREE.Float32BufferAttribute( colors, 3 ) );
+	geometryparticle.addAttribute( 'size', new THREE.Float32BufferAttribute( sizes, 1 ).setDynamic( true ) );
+
+	uniforms = {
+
+		texture: { value: new THREE.TextureLoader().load( "models/spark1.png" ) }
+
+		};
+
+		var shaderMaterial = new THREE.ShaderMaterial( {
+
+		uniforms: uniforms,
+		vertexShader: document.getElementById( 'vertexshader' ).textContent,
+		fragmentShader: document.getElementById( 'fragmentshader' ).textContent,
+
+		blending: THREE.AdditiveBlending,
+		depthTest: false,
+		transparent: true,
+		vertexColors: true
+
+		} );
+
+	
+	particleSystem = new THREE.Points( geometryparticle, shaderMaterial );
+
+	markerRoot1.add( particleSystem );
+	
+
+
+
+	let video = document.getElementById( 'video' );
+
+	let texture = new THREE.VideoTexture( video );
+
+	texture.minFilter = THREE.LinearFilter;
+
+	texture.magFilter = THREE.LinearFilter;
+
+	texture.format = THREE.RGBFormat;
+
+	let material1 = new THREE.MeshBasicMaterial( { map: texture } );
+
+	
+
+	mesh1 = new THREE.Mesh( geometry1, material1 );
+
+	//mesh1.rotation.x = -Math.PI/2;
+
+	mesh1.rotation.x = 149.5;
+
+	mesh1.rotation.z = -0.05;
+
+	mesh1.scale.x = 1.5;
+
+
+
+	markerRoot1.add( mesh1 );
+
+	var textureplane, materialplane, plane;
+
+	textureplane = THREE.ImageUtils.loadTexture( "models/spr_target_oatly_bnt_facebook.png" );
+
+
+	var geometry	= new THREE.CubeGeometry(0.5,0.5,0.5);
+
+	var material	= new THREE.MeshNormalMaterial({
+
+		transparent : true,
+
+		opacity: 0.15,
+
+		side: THREE.DoubleSide
+
+	});
+
+	var geometrycylinder = new THREE.CubeGeometry(0.5,0.5,0.5);
+	var aFaces = geometrycylinder.faces.length;
+	console.log(geometrycylinder.faces.length);
+	for(var i=0;i<aFaces;i++) {
+	if(i < 64){
+		geometrycylinder.faces[i].materialIndex = 0;
+	}else if(i > 63 && i < 96){
+		geometrycylinder.faces[i].materialIndex = 1;
+	}else{
+		geometrycylinder.faces[i].materialIndex = 3;
+	}
+	}
+
+	
+
+
+	var materialTop = new THREE.MeshPhongMaterial({transparent : true});
+	var materialSide = new THREE.MeshPhongMaterial({transparent : true});
+	var materialsArray = [];
+	materialsArray.push(materialTop); //materialindex = 0
+	materialsArray.push(materialSide); // materialindex = 1
+	var material = new THREE.MeshFaceMaterial(materialsArray);
+	
+	var textureLoader = new THREE.TextureLoader();
+
+	
+
+	var geometry4 = new THREE.BoxGeometry(1,1,1);
+
+	
+
+	let loader = new THREE.TextureLoader();
+
+	let facebooktexture = loader.load( 'models/spr_target_oatly_bnt_facebook.png', render );
+
+
+
+	let materialfacebook = new THREE.MeshLambertMaterial({ 
+
+		map: facebooktexture
+
+	});
+
+	let playtexture = loader.load( 'models/spr_f_video_play.png', render );
+
+	let materialplay = new THREE.MeshLambertMaterial({ 
+
+	map: playtexture
+
+});
+
+	let pausetexture = loader.load( 'models/spr_f_video_pause.png', render );
+
+	let materialpause = new THREE.MeshLambertMaterial({ 
+
+	map: pausetexture
+
+	});
+
+
+
+	let loader2 = new THREE.TextureLoader();
+
+	let instagramtexture = loader2.load( 'models/spr_target_oatly_btn_instagram.png', render );
+
+
+
+	let materialinstagram = new THREE.MeshLambertMaterial({ 
+
+		map: instagramtexture
+
+	});
+	//imprime diferente cara para cada lado del cuadrado
+	const materials = [
+	new THREE.MeshBasicMaterial({map: loader.load('models/transparent.png')}),
+	new THREE.MeshBasicMaterial({map: loader.load('models/transparent.png')}),
+	new THREE.MeshBasicMaterial({map: loader.load('models/spr_target_oatly_btn_instagram.png')}),
+	new THREE.MeshBasicMaterial({map: loader.load('models/transparent.png')}),
+	new THREE.MeshBasicMaterial({map: loader.load('models/transparent.png')}),
+	new THREE.MeshBasicMaterial({map: loader.load('models/transparent.png')}),
+	];
+	const materialsface = [
+	new THREE.MeshBasicMaterial({map: loader.load('models/transparent.png')}),
+	new THREE.MeshBasicMaterial({map: loader.load('models/transparent.png')}),
+	new THREE.MeshBasicMaterial({map: loader.load('models/spr_target_oatly_bnt_facebook.png')}),
+	new THREE.MeshBasicMaterial({map: loader.load('models/transparent.png')}),
+	new THREE.MeshBasicMaterial({map: loader.load('models/transparent.png')}),
+	new THREE.MeshBasicMaterial({map: loader.load('models/transparent.png')}),
+	];
+
+	const materialsplay = [
+	new THREE.MeshBasicMaterial({map: loader.load('models/transparent.png')}),
+	new THREE.MeshBasicMaterial({map: loader.load('models/transparent.png')}),
+	new THREE.MeshBasicMaterial({map: loader.load('models/spr_f_video_play.png')}),
+	new THREE.MeshBasicMaterial({map: loader.load('models/transparent.png')}),
+	new THREE.MeshBasicMaterial({map: loader.load('models/transparent.png')}),
+	new THREE.MeshBasicMaterial({map: loader.load('models/transparent.png')}),
+	];
+
+	const materialspause = [
+	new THREE.MeshBasicMaterial({map: loader.load('models/transparent.png')}),
+	new THREE.MeshBasicMaterial({map: loader.load('models/transparent.png')}),
+	new THREE.MeshBasicMaterial({map: loader.load('models/spr_f_video_pause.png')}),
+	new THREE.MeshBasicMaterial({map: loader.load('models/transparent.png')}),
+	new THREE.MeshBasicMaterial({map: loader.load('models/transparent.png')}),
+	new THREE.MeshBasicMaterial({map: loader.load('models/transparent.png')}),
+	];
+	
+
+	
+
+	var mesh7 = new THREE.Mesh( geometry, materials  );
+
+	mesh7.position.z	= 1.6;
+
+	mesh7.position.x = 1;
+
+	markerRoot1.add( mesh7 );
+
+
+
+	var mesh12 = new THREE.Mesh( geometry, materialsplay);
+
+	mesh12.position.z	= -0.3;
+
+	mesh12.position.x = 0.0;
+
+	mesh12.position.y = -0.3;
+
+	markerRoot1.add( mesh12 );
+
+	var mesh11 = new THREE.Mesh( geometry, materialspause  );
+
+	mesh11.position.z	= -1.4;
+
+	mesh11.position.x = -0.76;
+
+	markerRoot1.add( mesh11 );
+
+
+	
+
+	
+ 
+
+	
+
+
+
+	var mesh8 = new THREE.Mesh( geometry, materialsface  );
+
+	mesh8.position.z	= 1.6;
+
+	mesh8.position.x = -1;
+
+	markerRoot1.add( mesh8 );
+
+
+
+	var mesh = new THREE.Mesh( geometry, materialinstagram  );
+
+	mesh.position.z	= 1.6;
+
+	mesh.position.x = 1;
+
+	markerRoot1.add( mesh );
+
+
+
+	var geometry2	= new THREE.CubeGeometry(0.5,0.5,0.5);
+
+	var material2	= new THREE.MeshNormalMaterial({
+
+		transparent : true,
+
+		opacity: 0.5,
+
+		side: THREE.DoubleSide
+
+	});
+
+	var mesh3	= new THREE.Mesh( geometry2, materialfacebook );
+
+	mesh3.position.z	= 1.6;
+
+	mesh3.position.x = -1;
+
+	markerRoot1.add( mesh3 );
+
+
+	facebook = new THREE.Mesh(geometry2, materialfacebook );
+				scene.add( facebook );
+	instagram2 = new THREE.Mesh(geometry2, materialfacebook );
+				scene.add( instagram2 );
+
+	
+
+
+	//attach url
+	
+	var leftDiv = document.createElement("div"); //Create left div
+    leftDiv.id = "left"; //Assign div id
+    a = document.createElement('a');
+    a.href =  'https://www.facebook.com/Chargello/'; // Insted of calling setAttribute 
+    a.innerHTML = " " // <a>INNER_TEXT</a>
+    leftDiv.appendChild(a); // Append the link to the div
+	image = document.createElement('img');
+	image.setAttribute("src", "models/spr_target_oatly_bnt_facebook.png");
+	image.setAttribute("height", "100%");
+	image.setAttribute("width", "100%");
+	//image.style.filters.alpha.opacity=90 //IE4 syntax        //NS6 syntax
+	image.style.filter       = "alpha(opacity=0)";
+	image.style.opacity      = 0;
+	a.appendChild(image);
+	var FacebookUrl = new THREE.CSS2DObject( leftDiv );
+	var imagefacebook = mesh3.add( FacebookUrl);
+	markerRoot1.add(imagefacebook);
+
+
+	var leftDiv2 = document.createElement("div"); //Create left div
+    leftDiv2.id = "right"; //Assign div id
+    b = document.createElement('a');
+    b.href =  'https://www.instagram.com/chargello/?hl=es-la'; // Insted of calling setAttribute 
+    leftDiv2.appendChild(b); // Append the link to the div
+	image = document.createElement('img');
+	image.setAttribute("src", "models/spr_target_oatly_btn_instagram.png");
+	image.setAttribute("height", "100%");
+	image.setAttribute("width", "100%")
+	image.style.filter       = "alpha(opacity=0)";
+	image.style.opacity      = 0;
+	b.appendChild(image);
+    
+	var FacebookUrl2 = new THREE.CSS2DObject( leftDiv2 );
+	var imageinstagram = mesh.add( FacebookUrl2);
+	markerRoot1.add(imageinstagram);
+	// add play and pause button attach to model
+	playvideo = document.getElementById("playvideo");
+	var PlayVideo = new THREE.CSS2DObject (playvideo)
+	mesh12.add( PlayVideo);
+
+	pausevideo = document.getElementById("pausevideo");
+	var PauseVideo = new THREE.CSS2DObject (pausevideo)
+	mesh11.add( PauseVideo );
+
+	
+
+	var objecttwoLoader = new THREE.ObjectLoader();
+	objecttwoLoader.load( "models/goldstar.json", function ( obj ) {
+	//objectLoader.load( "models/gold-star.json", function ( obj ) {
+		obj.traverse( function ( child ) {
+        if ( child instanceof THREE.Mesh )
+            child.material.color.setRGB (255,255,0);
+    });
+
+		myObj = obj;
+		obj.scale.set(1.5,1.5,1.5);
+		obj.rotation.z += 110;
+		obj.rotation.x += 90;
+		obj.position.z += 2;
+		markerRoot1.add( obj );
+	} );
+
+	
+
+
+
+
+	
+
+	
+
+}
+
+function deleteobject ()
+{
+	markerRoot1.remove(mesh11);
+	mesh11.geometry.dispose();
+	mesh11.material.dispose();
+	mesh11 = undefined;
+}
+
+
+
+function update()
+
+{
+
+	// update artoolkit on every frame
+
+	if ( arToolkitSource.ready !== false )
+
+		arToolkitContext.update( arToolkitSource.domElement );
+
+}
+
+
+
+
+
+function render()
+
+{
+
+	renderer.render( scene, camera );
+	
+
+}
+
+
+
+
+
+function animate()
+
+{
+
+	requestAnimationFrame(animate);
+
+	deltaTime = clock.getDelta();
+
+	totalTime += deltaTime;
+
+	renderer.render( scene, camera );
+	labelRenderer.render( scene, camera );
+
+	
+
+	
+
+	update();
+
+	render();
+
+}
+
+
+
+</script>
+
+
+
+</body>
+
+</html>
