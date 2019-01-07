@@ -240,7 +240,7 @@
 
 	<button id="playvideo" style="background-color: none ; color: white; border: none; font-family: Monospace; border-radius: 25px; text-decoration: none; opacity: 0; filter: alpha(opacity=0); width: 25%; height: 10%; margin-right:3rem; " onclick='onVideoPlayButtonClick()'></button>
 
-	<button  id="pausevideo" style="background-color: none; color: white; border: none; font-family: Monospace; border-radius: 25px; text-decoration: none; opacity: 0; filter: alpha(opacity=0); width: 25%; height: 10%;" onclick='onVideoPauseButtonClick()' ></button>
+	<button  id="pausevideo" style="background-color: none; color: white; border: none; font-family: Monospace; border-radius: 25px; text-decoration: none; opacity: 0; filter: alpha(opacity=0); width: 25%; height: 10%;" onclick='onVideoPauseButtonClick()'></button>
 
 	<br> </br>
 	<br> </br>
@@ -779,12 +779,12 @@ function initialize()
 	];
 
 	const materialsplay = [
-	new THREE.MeshBasicMaterial({map: loader.load('models/transparent.png')}),
-	new THREE.MeshBasicMaterial({map: loader.load('models/transparent.png')}),
+	new THREE.MeshBasicMaterial({map: loader.load('')}),
+	new THREE.MeshBasicMaterial({map: loader.load('')}),
 	new THREE.MeshBasicMaterial({map: loader.load('models/spr_f_video_play.png')}),
-	new THREE.MeshBasicMaterial({map: loader.load('models/transparent.png')}),
-	new THREE.MeshBasicMaterial({map: loader.load('models/transparent.png')}),
-	new THREE.MeshBasicMaterial({map: loader.load('models/transparent.png')}),
+	new THREE.MeshBasicMaterial({map: loader.load('')}),
+	new THREE.MeshBasicMaterial({map: loader.load('')}),
+	new THREE.MeshBasicMaterial({map: loader.load('')}),
 	];
 
 	const materialspause = [
@@ -811,21 +811,19 @@ function initialize()
 
 	var mesh12 = new THREE.Mesh( geometry, materialsplay);
 
-	mesh12.position.z	= -0.3;
+	mesh12.position.z	= 0;
 
-	mesh12.position.x = 0.0;
-
-	mesh12.position.y = -0.3;
+	mesh12.position.x = 0;
 
 	markerRoot1.add( mesh12 );
 
-	var mesh11 = new THREE.Mesh( geometry, materialspause  );
+	//var mesh11 = new THREE.Mesh( geometry, materialspause  );
 
-	mesh11.position.z	= -1.4;
+	//mesh11.position.z	= -1.4;
 
-	mesh11.position.x = -0.76;
+	//mesh11.position.x = -0.76;
 
-	markerRoot1.add( mesh11 );
+	//markerRoot1.add( mesh11 );
 
 
 	
@@ -928,9 +926,9 @@ function initialize()
 	var PlayVideo = new THREE.CSS2DObject (playvideo)
 	mesh12.add( PlayVideo);
 
-	pausevideo = document.getElementById("pausevideo");
-	var PauseVideo = new THREE.CSS2DObject (pausevideo)
-	mesh11.add( PauseVideo );
+	//pausevideo = document.getElementById("pausevideo");
+	//var PauseVideo = new THREE.CSS2DObject (pausevideo)
+	//mesh11.add( PauseVideo );
 
 	
 
