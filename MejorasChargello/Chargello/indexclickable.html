@@ -818,22 +818,7 @@ function initialize()
 
 
 
-	var mesh12 = new THREE.Mesh( geometry, materialsplay);
-
-	mesh12.position.z	= -1.4;
-
-	mesh12.position.x = 0;
-
-	markerRoot1.add( mesh12 );
-
-
-	var mesh11 = new THREE.Mesh( geometry, materialspause  );
-
-	mesh11.position.z	= -1.4;
-
-	mesh11.position.x = -0.76;
-
-	mesh11.name = "mesh11";
+	
 
 	//markerRoot1.add( mesh11 );
 
@@ -927,9 +912,7 @@ function initialize()
 	var imageinstagram = mesh.add( FacebookUrl2);
 	markerRoot1.add(imageinstagram);
 	// add play and pause button attach to model
-	playvideo = document.getElementById("playvideo");
-	var PlayVideo = new THREE.CSS2DObject (playvideo)
-	mesh12.add( PlayVideo);
+	
 	
 
 	
@@ -956,12 +939,6 @@ function initialize()
 	} );
 
 	
-
-
-
-
-	
-
 	
 
 }
