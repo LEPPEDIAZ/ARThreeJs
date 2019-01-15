@@ -1,6 +1,4 @@
 <!DOCTYPE html>
-
-
 <head>
 
 	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
@@ -14,6 +12,8 @@
 	<script src="js/3Dink.js"></script>
 
 	<script src="js/renderers/CSS2DRenderer.js"></script>
+
+	<script src="js/renderers/CSS3DRenderer.js"></script>
     
 	<!-- include jsartookit -->
 
@@ -450,11 +450,7 @@ function initialize()
 	renderer.setSize( window.innerWidth, window.innerHeight );
 	document.body.appendChild( renderer.domElement );
 
-	labelRenderer = new THREE.CSS2DRenderer();
-	labelRenderer.setSize( window.innerWidth, window.innerHeight );
-	labelRenderer.domElement.style.position = 'absolute';
-	labelRenderer.domElement.style.top = 0;
-	document.body.appendChild( labelRenderer.domElement );
+	
 
 
 
@@ -582,12 +578,16 @@ function initialize()
 
 		type: 'pattern', patternUrl: "data/marcadorlittle.patt",
 
+	})
 	
 
 
-	})
-
-
+	labelRenderer = new THREE.CSS2DRenderer();
+	labelRenderer.setSize( window.innerWidth, window.innerHeight );
+	labelRenderer.domElement.style.position = 'absolute';
+	labelRenderer.domElement.style.top = 0;
+	document.body.appendChild( labelRenderer.domElement );
+	markerRoot1.add(labelRenderer);
 
 	
 
@@ -908,8 +908,10 @@ function initialize()
 	image.style.opacity      = 0;
 	b.appendChild(image);
 	var FacebookUrl2 = new THREE.CSS2DObject( leftDiv2 );
+	markerRoot1.add(FacebookUrl2);
 	var imageinstagram = mesh.add( FacebookUrl2);
-	markerRoot1.add(imageinstagram);
+	
+	
 	// add play and pause button attach to model
 	
 
@@ -991,6 +993,7 @@ function animate()
 	totalTime += deltaTime;
 
 	renderer.render( scene, camera );
+
 	labelRenderer.render( scene, camera );
 
 	

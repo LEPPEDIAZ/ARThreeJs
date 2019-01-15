@@ -309,9 +309,6 @@
 <script>
 
 
-
-
-
 var scene, camera, renderer, clock, deltaTime, totalTime;
 
 
@@ -340,14 +337,9 @@ var particles = 1500;
 
 initialize();
 
+
+
 animate();
-
-
-document.getElementById('right').style.visibility = 'hidden';
-document.getElementById('left').style.visibility = 'hidden';
-document.getElementById('playvideo').style.visibility = 'hidden';
-
-
 
 
 function myFunction() {
@@ -393,16 +385,16 @@ function action() {
 	video.play()
     hidden = !hidden;
     if(hidden) {
-		document.getElementById('toggler').style.visibility = 'hidden';
-		document.getElementById('left').style.visibility = 'visible';
-		document.getElementById('right').style.visibility = 'visible';
-		document.getElementById('playvideo').style.visibility = 'visible';
+		document.getElementById('toggler').style.visibility = 'visible';
+		document.getElementById('facebookdiv').style.visibility = 'hidden';
+		document.getElementById('instagramdiv').style.visibility = 'hidden';
+		
 		
     } else {
-		document.getElementById('toggler').style.visibility = 'visible';
-		document.getElementById('left').style.visibility = 'hidden';
-		document.getElementById('right').style.visibility = 'hidden';
-		document.getElementById('playvideo').style.visibility = 'hidden';
+		document.getElementById('toggler').style.visibility = 'hidden';
+		document.getElementById('facebookdiv').style.visibility = 'visible';
+		document.getElementById('instagramdiv').style.visibility = 'visible';
+		
 		
     }
 }
@@ -877,7 +869,7 @@ function initialize()
 	//attach url
 	
 	var leftDiv = document.createElement("div"); //Create left div
-    leftDiv.id = "left"; //Assign div id
+    leftDiv.id = "facebookdiv"; //Assign div id
     a = document.createElement('a');
     a.href =  'https://www.facebook.com/Chargello/'; // Insted of calling setAttribute 
     a.innerHTML = " " // <a>INNER_TEXT</a>
@@ -887,8 +879,8 @@ function initialize()
 	image.setAttribute("height", "100%");
 	image.setAttribute("width", "100%");
 	//image.style.filters.alpha.opacity=90 //IE4 syntax        //NS6 syntax
-	image.style.filter       = "alpha(opacity=0)";
-	image.style.opacity      = 0;
+	image.style.filter       = "alpha(opacity=75)";
+	image.style.opacity      = 75;
 	a.appendChild(image);
 	var FacebookUrl = new THREE.CSS2DObject( leftDiv );
 	var imagefacebook = mesh3.add( FacebookUrl);
@@ -896,7 +888,7 @@ function initialize()
 
 
 	var leftDiv2 = document.createElement("div"); //Create left div
-    leftDiv2.id = "right"; //Assign div id
+    leftDiv2.id = "instagramdiv"; //Assign div id
     b = document.createElement('a');
     b.href =  'https://www.instagram.com/chargello/?hl=es-la'; // Insted of calling setAttribute 
     leftDiv2.appendChild(b); // Append the link to the div
@@ -904,8 +896,8 @@ function initialize()
 	image.setAttribute("src", "models/spr_target_oatly_btn_instagram.png");
 	image.setAttribute("height", "100%");
 	image.setAttribute("width", "100%")
-	image.style.filter       = "alpha(opacity=0)";
-	image.style.opacity      = 0;
+	image.style.filter       = "alpha(opacity=75";
+	image.style.opacity      = 75;
 	b.appendChild(image);
 	var FacebookUrl2 = new THREE.CSS2DObject( leftDiv2 );
 	var imageinstagram = mesh.add( FacebookUrl2);
