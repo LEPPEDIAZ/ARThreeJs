@@ -135,16 +135,13 @@
 			display: inline-block;
 			width: 70%;
 			height: 70%; 
-			position: fixed;
-			margin-left: 100rem;
-			margin-right: 100rem; 
+			position: fixed; 
 			top: 20% ; 
 			left: 15%; 
 			background: url('images/tutorial.png');  
 			background-repeat: no-repeat; 
 			background-size: contain; 
 			background-position: left; 
-			margin: none;
 			-webkit-animation: bgcolorchange 4s infinite; /* Chrome, Safari, Opera */ 
   			animation: 4s infinite bgcolorchange;
 
@@ -311,6 +308,9 @@
 <script>
 
 
+
+
+
 var scene, camera, renderer, clock, deltaTime, totalTime;
 
 
@@ -339,9 +339,14 @@ var particles = 1500;
 
 initialize();
 
-
-
 animate();
+
+
+document.getElementById('right').style.visibility = 'hidden';
+document.getElementById('left').style.visibility = 'hidden';
+document.getElementById('playvideo').style.visibility = 'hidden';
+
+
 
 
 function myFunction() {
@@ -387,14 +392,16 @@ function action() {
 	video.play()
     hidden = !hidden;
     if(hidden) {
-		document.getElementById('toggler').style.visibility = 'visible';
-		
-		
+		document.getElementById('toggler').style.visibility = 'hidden';
+		document.getElementById('left').style.visibility = 'visible';
+		document.getElementById('right').style.visibility = 'visible';
+		document.getElementById('playvideo').style.visibility = 'visible';
 		
     } else {
-		document.getElementById('toggler').style.visibility = 'hidden';
-		
-		
+		document.getElementById('toggler').style.visibility = 'visible';
+		document.getElementById('left').style.visibility = 'hidden';
+		document.getElementById('right').style.visibility = 'hidden';
+		document.getElementById('playvideo').style.visibility = 'hidden';
 		
     }
 }
@@ -869,7 +876,7 @@ function initialize()
 	//attach url
 	
 	var leftDiv = document.createElement("div"); //Create left div
-    leftDiv.id = "facebookdiv"; //Assign div id
+    leftDiv.id = "left"; //Assign div id
     a = document.createElement('a');
     a.href =  'https://www.facebook.com/Chargello/'; // Insted of calling setAttribute 
     a.innerHTML = " " // <a>INNER_TEXT</a>
@@ -888,7 +895,7 @@ function initialize()
 
 
 	var leftDiv2 = document.createElement("div"); //Create left div
-    leftDiv2.id = "instagramdiv"; //Assign div id
+    leftDiv2.id = "right"; //Assign div id
     b = document.createElement('a');
     b.href =  'https://www.instagram.com/chargello/?hl=es-la'; // Insted of calling setAttribute 
     leftDiv2.appendChild(b); // Append the link to the div
@@ -896,7 +903,7 @@ function initialize()
 	image.setAttribute("src", "models/spr_target_oatly_btn_instagram.png");
 	image.setAttribute("height", "100%");
 	image.setAttribute("width", "100%")
-	image.style.filter       = "alpha(opacity=75";
+	image.style.filter       = "alpha(opacity=75)";
 	image.style.opacity      = 75;
 	b.appendChild(image);
 	var FacebookUrl2 = new THREE.CSS2DObject( leftDiv2 );
