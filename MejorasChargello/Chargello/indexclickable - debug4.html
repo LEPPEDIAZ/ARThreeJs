@@ -223,14 +223,14 @@
 
 <div class="dropdown" style='position: absolute;  text-align: center; z-index: 1; background-color: none;'>
 	<div onclick="myFunction()" class="dropbtn"  >
-	<div id="myDropdown" class="dropdown-content">
-		<img src="fondo/spr_main_menu_cerrar.png" height="10%" width="10%" align="left"  />
-		<br> </br>
-		<img src="fondo/spr_main_menu_logo.png"  align="middle" style="justify-content: center; align-self: center; display: inline-block; height: 40%; width: 40%; "/>
-		<br> </br>
-		<br> </br>
-		<a href="http://eyeflyapps.com/" style="font-family:LEIXO; color: #606060; font-size:45%;"> <img src="fondo/spr_main_menu_links.png" height="30" width="30" style=" justify-content: center; align-self: center; display: inline-block;"></img> mira mas de eyefly ar/vr</a>
-		<a href="http://eyeflyapps.com/contact-page/" style="font-family:LEIXO; color: #606060; font-size:45%;"> <img src="fondo/spr_main_menu_links.png" height="30" width="30" style=" justify-content: center; align-self: center; display: inline-block;"></img> contact</a>
+	<div onclick="myFunctionCamera()" id="myDropdown" class="dropdown-content">
+		<img src="fondo/spr_main_menu_cerrar.png" height="10%" width="10%" align="left" onclick="myFunctionCamera()" />
+		<br onclick="myFunctionCamera()"> </br>
+		<img src="fondo/spr_main_menu_logo.png"  align="middle" style="justify-content: center; align-self: center; display: inline-block; height: 40%; width: 40%; " onclick="myFunctionCamera()"/>
+		<br onclick="myFunctionCamera()"> </br>
+		<br onclick="myFunctionCamera()"> </br>
+		<a onclick="myFunctionCamera()" href="http://eyeflyapps.com/" style="font-family:LEIXO; color: #606060; font-size:45%;"> <img src="fondo/spr_main_menu_links.png" height="30" width="30" style=" justify-content: center; align-self: center; display: inline-block;"></img> mira mas de eyefly ar/vr</a>
+		<a onclick="myFunctionCamera()" href="http://eyeflyapps.com/contact-page/" style="font-family:LEIXO; color: #606060; font-size:45%;"> <img src="fondo/spr_main_menu_links.png" height="30" width="30" style=" justify-content: center; align-self: center; display: inline-block;"></img> contact</a>
 		
 	</div>
 	  </div>
@@ -353,10 +353,11 @@ document.getElementById('playvideo').style.visibility = 'hidden';
 
 function myFunction() {
   document.getElementById("myDropdown").classList.toggle("show");
-  camera.position.set(0,100,0);
+  camera.position.set(0,1.2,0);
 }
 function myFunctionCamera() {
   camera.position.set(0,0,0);
+  console.log("pruebaA");
 }
 
 // Close the dropdown if the user clicks outside of it
@@ -368,6 +369,8 @@ window.onclick = function(event) {
       var openDropdown = dropdowns[i];
       if (openDropdown.classList.contains('show')) {
         openDropdown.classList.remove('show');
+		
+
 	
       }
     }
@@ -416,9 +419,11 @@ function nobutton() {
     if(hidden) {
 		document.getElementById('dropbtn').style.visibility = 'visible';
 		
+		
 	
     } else {
 		document.getElementById('dropbtn').style.visibility = 'hidden';
+		
 		
     }
 }
@@ -442,6 +447,8 @@ function initialize()
 	camera = new THREE.Camera();
 
 	camera.position.set(0,100,0);
+
+
 
 	scene.add(camera);
 
@@ -502,7 +509,7 @@ function initialize()
 		sourceType : 'webcam',
 
 	});
-
+	
 
 
 	function onResize()
@@ -591,7 +598,7 @@ function initialize()
 
 		type: 'pattern', patternUrl: "data/marcadorlittle.patt",
 
-	
+		
 
 
 	})
@@ -971,15 +978,6 @@ function render()
 
 	particleSystem.rotation.z = 0.01 * time;
 
-	var sizes = geometry.attributes.size.array;
-
-	for ( var i = 0; i < particles; i ++ ) {
-
-		sizes[ i ] = 10 * ( 1 + Math.sin( 0.1 * i + time ) );
-
-	}
-
-	geometry.attributes.size.needsUpdate = true;
 
 	renderer.render( scene, camera );
 	
@@ -1011,7 +1009,7 @@ function animate()
 
 	render();
 
-	stats.update();
+
 
 }
 
