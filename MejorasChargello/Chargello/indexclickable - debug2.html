@@ -41,6 +41,8 @@
 
 	<script src="js/utils/BufferGeometryUtils.js"></script>
 
+	<script src="https://cdn.rawgit.com/mrdoob/three.js/master/examples/js/controls/OrbitControls.js"></script>
+
 
 
 </head>
@@ -224,7 +226,7 @@
 	<div id="myDropdown" class="dropdown-content">
 		<img src="fondo/spr_main_menu_cerrar.png" height="10%" width="10%" align="left" />
 		<br> </br>
-		<img src="fondo/spr_main_menu_logo.png"  align="middle" style="justify-content: center; align-self: center; display: inline-block; height: auto; width: auto; min-width:0.01vw ; min-height: 0.01vh; "/>
+		<img src="fondo/spr_main_menu_logo.png"  align="middle" style="justify-content: center; align-self: center; display: inline-block; height: 30%; width: 30%; "/>
 		<br> </br>
 		<br> </br>
 		<a href="http://eyeflyapps.com/" style="font-family:LEIXO; color: #606060; font-size:45%;"> <img src="fondo/spr_main_menu_links.png" height="30" width="30" style=" justify-content: center; align-self: center; display: inline-block;"></img> mira mas de eyefly ar/vr</a>
@@ -646,7 +648,7 @@ function initialize()
 
 	markerRoot1.add( particleSystem );
 	
-
+	
 
 
 	let video = document.getElementById( 'video' );
@@ -894,6 +896,7 @@ function initialize()
 	markerRoot1.add(imagefacebook);
 
 
+
 	var leftDiv2 = document.createElement("div"); //Create left div
     leftDiv2.id = "right"; //Assign div id
     b = document.createElement('a');
@@ -1003,6 +1006,10 @@ function animate()
 	stats.update();
 
 }
+
+
+
+
 
 function eliminaralplay (objName) {
 	var selectedobject = scene.getObjectByName(objName);
