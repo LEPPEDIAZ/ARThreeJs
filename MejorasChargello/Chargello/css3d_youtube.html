@@ -69,15 +69,11 @@
 				renderer.setSize( window.innerWidth, window.innerHeight );
 				container.appendChild( renderer.domElement );
 
-				var group = new THREE.Group();
+				var group = new THREE.Mesh();
 				group.add( new Element( 'yt5vbb5RAv4', 0, 0, 240, 0 ) );
-				group.add( new Element( 'yt5vbb5RAv4', 240, 0, 0, Math.PI / 2 ) );
-				group.add( new Element( 'yt5vbb5RAv4', 0, 0, - 240, Math.PI ) );
-				group.add( new Element( 'yt5vbb5RAv4', - 240, 0, 0, - Math.PI / 2 ) );
 				scene.add( group );
 
-				controls = new THREE.TrackballControls( camera );
-				controls.rotateSpeed = 4;
+				
 
 				window.addEventListener( 'resize', onWindowResize, false );
 
@@ -110,7 +106,6 @@
 			function animate() {
 
 				requestAnimationFrame( animate );
-				controls.update();
 				renderer.render( scene, camera );
 
 			}
